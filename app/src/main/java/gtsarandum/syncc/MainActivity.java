@@ -1,0 +1,185 @@
+package gtsarandum.syncc;
+
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.Date;
+
+
+public class MainActivity extends Activity
+        implements
+        NavigationDrawerFragment.NavigationDrawerCallbacks,
+        CalendarFragment.OnCalendarFragmentInteractionListener,
+        ContactFragment.OnContactFragmentInteractionListener,
+        NoteFragment.OnNoteFragmentInteractionListener
+
+{
+
+    /**
+     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
+     */
+    private NavigationDrawerFragment mNavigationDrawerFragment;
+
+    /**
+     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
+     */
+    private CharSequence mTitle;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mNavigationDrawerFragment = (NavigationDrawerFragment)
+                getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mTitle = getTitle();
+
+        // Set up the drawer.
+        mNavigationDrawerFragment.setUp(
+                R.id.navigation_drawer,
+                (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        Fragment fragment=null;
+
+        switch (position){
+            case 0://open calendar
+                    fragment=new CalendarFragment();
+                break;
+            case 1://open contacts
+                    fragment=new ContactFragment();
+                break;
+            case 2://open notes
+                    fragment=new NoteFragment();
+                break;
+            default:break;
+        }
+
+        if(fragment!=null){
+            replaceContainer(fragment);
+        } else {
+            test("fragment=null");
+        }
+
+        onSectionAttached(position);
+    }
+
+    private void replaceContainer(Fragment fragment){
+        FragmentTransaction transaction=getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container,fragment);
+        transaction.commit();
+    }
+
+    private void newEvent(Date d){//update to create activity and give all options to create event
+        Calendar begin =Calendar.getInstance();
+        begin.setTime(d);
+
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setData(CalendarContract.Events.CONTENT_URI);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin.getTimeInMillis());
+
+        startActivity(intent);
+    }
+
+    public void onSectionAttached(int number) {
+        switch (number) {
+            case 0:
+                mTitle = getString(R.string.title_section1);
+                break;
+            case 1:
+                mTitle = getString(R.string.title_section2);
+                break;
+            case 2:
+                mTitle = getString(R.string.title_section3);
+                break;
+            default:break;
+        }
+    }
+
+    public void restoreActionBar() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle(mTitle);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+            // Only show items in the action bar relevant to this screen
+            // if the drawer is not showing. Otherwise, let the drawer
+            // decide what to show in the action bar.
+            getMenuInflater().inflate(R.menu.main, menu);
+            restoreActionBar();
+            return true;
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_settings://settings
+                openSettings();
+                break;
+            case R.id.login:
+                openLogin();
+                break;
+            case R.id.logout:
+                logout();
+                break;
+            default:break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openSettings(){
+
+    }
+
+    private void openLogin(){
+
+    }
+
+    private void logout(){
+
+    }
+
+    //makes a toast that says the given charSequence
+    public void test(CharSequence charSequence){
+        Toast.makeText(getApplicationContext(),charSequence,Toast.LENGTH_SHORT).show();
+    }
+
+
+    //interface methods
+    @Override
+    public void onCalendarFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onContactFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onNoteFragmentInteraction(Uri uri) {
+
+    }
+}
