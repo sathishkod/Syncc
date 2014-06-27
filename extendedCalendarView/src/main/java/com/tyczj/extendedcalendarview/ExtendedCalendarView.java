@@ -1,8 +1,5 @@
 package com.tyczj.extendedcalendarview;
 
-import java.util.Calendar;
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,15 +10,21 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
 
-public class ExtendedCalendarView extends RelativeLayout implements OnItemClickListener,
+import java.util.Calendar;
+import java.util.Locale;
+
+public class ExtendedCalendarView extends RelativeLayout implements
+        OnItemClickListener,
+        OnItemLongClickListener,
 	OnClickListener{
 	
 	private Context context;
@@ -43,6 +46,7 @@ public class ExtendedCalendarView extends RelativeLayout implements OnItemClickL
 	
 	public interface OnDayClickListener{
 		public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day);
+        public void onDayLongClicked(AdapterView<?> adapter, View view, int position, long id, Day day);
 	}
 
 	public ExtendedCalendarView(Context context) {
@@ -171,13 +175,18 @@ public class ExtendedCalendarView extends RelativeLayout implements OnItemClickL
 			}
 		}
 	}
-	
-	/**
-	 * 
-	 * @param listener
-	 * 
-	 * Set a listener for when you press on a day in the month
-	 */
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3){
+        if (dayListener!=null){
+            Day d=(Day) mAdapter.getItem(arg2);
+            if(d.getDay()!=0){
+                dayListener.onDayLongClicked(arg0,arg1,arg2,arg3,d);
+            }
+        }
+       return true;
+    }
+
 	public void setOnDayClickListener(OnDayClickListener listener){
 		if(calendar != null){
 			dayListener = listener;
@@ -253,7 +262,6 @@ public class ExtendedCalendarView extends RelativeLayout implements OnItemClickL
 		if(Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){
 			base.setBackground(drawable);
 		}
-		
 	}
 	
 	/**

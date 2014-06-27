@@ -1,24 +1,30 @@
 package gtsarandum.syncc;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.tyczj.extendedcalendarview.Day;
 import com.tyczj.extendedcalendarview.ExtendedCalendarView;
 
 
-public class CalendarFragment extends Fragment {
+public class CalendarFragment extends Fragment implements
+        ExtendedCalendarView.OnDayClickListener
+{
 
     private OnCalendarFragmentInteractionListener mListener;
 
     private ExtendedCalendarView extendedCalendarView;
     private FrameLayout frameLayout;
+
+    private CalenderClickedToMainListener calenderClickedToMainListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,7 @@ public class CalendarFragment extends Fragment {
         super.onActivityCreated(bundle);
 
         if (frameLayout!=null) {
-            extendedCalendarView = (ExtendedCalendarView) frameLayout.findViewById(R.id.calendar);
+            extendedCalendarView = (ExtendedCalendarView)frameLayout.findViewById(R.id.calendar);
         }else {
             test("frameLayout=null");
 
@@ -94,6 +100,31 @@ public class CalendarFragment extends Fragment {
     //makes a toast that says the given charSequence
     public void test(CharSequence charSequence){
         Toast.makeText(getActivity().getApplicationContext(), charSequence, Toast.LENGTH_SHORT).show();
+    }
+
+    public ExtendedCalendarView getExtendedCalendarView(){
+        return extendedCalendarView;
+    }
+
+    public FrameLayout getFrameLayout(){
+        return frameLayout;
+    }
+
+
+
+    @Override
+    public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
+        calenderClickedToMainListener.onDayClicked(adapter,view,position,id,day);
+    }
+
+    @Override
+    public void onDayLongClicked(AdapterView<?> adapter, View view, int position, long id, Day day){
+        calenderClickedToMainListener.onDayLongClicked(adapter,view,position,id,day);
+    }
+
+    public interface CalenderClickedToMainListener {
+        public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day);
+        public void onDayLongClicked(AdapterView<?> adapter, View view, int position, long id, Day day);
     }
 
 }

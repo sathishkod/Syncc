@@ -11,7 +11,11 @@ import android.provider.CalendarContract;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
+
+import com.tyczj.extendedcalendarview.Day;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +25,7 @@ public class MainActivity extends Activity
         implements
         NavigationDrawerFragment.NavigationDrawerCallbacks,
         CalendarFragment.OnCalendarFragmentInteractionListener,
+        CalendarFragment.CalenderClickedToMainListener,
         ContactFragment.OnContactFragmentInteractionListener,
         NoteFragment.OnNoteFragmentInteractionListener
 
@@ -57,13 +62,13 @@ public class MainActivity extends Activity
 
         switch (position){
             case 0://open calendar
-                    fragment=new CalendarFragment();
+                fragment=new CalendarFragment();
                 break;
             case 1://open contacts
-                    fragment=new ContactFragment();
+                fragment=new ContactFragment();
                 break;
             case 2://open notes
-                    fragment=new NoteFragment();
+                fragment=new NoteFragment();
                 break;
             default:break;
         }
@@ -180,6 +185,17 @@ public class MainActivity extends Activity
 
     @Override
     public void onNoteFragmentInteraction(Uri uri) {
+
+    }
+
+    //calender callbacks
+    @Override
+    public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
+        test("adfasdf");
+    }
+
+    @Override
+    public void onDayLongClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
 
     }
 }
