@@ -184,7 +184,7 @@ public class ExtendedCalendarView extends RelativeLayout implements
                 dayListener.onDayLongClicked(arg0,arg1,arg2,arg3,d);
             }
         }
-       return true;
+       return false;
     }
 
 	public void setOnDayClickListener(OnDayClickListener listener){

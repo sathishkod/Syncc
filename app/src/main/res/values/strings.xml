@@ -14,5 +14,7 @@
     <string name="display_results_here">Results will display here</string>
     <string name="shared_preferences_file_name">SynccSharedPreferences</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_live_login">LiveLoginActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

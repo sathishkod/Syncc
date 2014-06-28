@@ -7,7 +7,6 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,16 +15,12 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.tyczj.extendedcalendarview.Day;
-
-import java.util.Calendar;
-import java.util.Date;
+import com.tyczj.extendedcalendarview.ExtendedCalendarView;
 
 
 public class MainActivity extends Activity
         implements
         NavigationDrawerFragment.NavigationDrawerCallbacks,
-        CalendarFragment.OnCalendarFragmentInteractionListener,
-        CalendarFragment.CalenderClickedToMainListener,
         ContactFragment.OnContactFragmentInteractionListener,
         NoteFragment.OnNoteFragmentInteractionListener
 
@@ -88,17 +83,6 @@ public class MainActivity extends Activity
         transaction.commit();
     }
 
-    private void newEvent(Date d){//update to create activity and give all options to create event
-        Calendar begin =Calendar.getInstance();
-        begin.setTime(d);
-
-        Intent intent = new Intent(Intent.ACTION_INSERT);
-        intent.setData(CalendarContract.Events.CONTENT_URI);
-        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin.getTimeInMillis());
-
-        startActivity(intent);
-    }
-
     public void onSectionAttached(int number) {
         switch (number) {
             case 0:
@@ -159,7 +143,8 @@ public class MainActivity extends Activity
     }
 
     private void openLogin(){
-
+        Intent intent=new Intent(getApplicationContext(),LiveLoginActivity.class);
+        startActivity(intent);
     }
 
     private void logout(){
@@ -173,10 +158,6 @@ public class MainActivity extends Activity
 
 
     //interface methods
-    @Override
-    public void onCalendarFragmentInteraction(Uri uri) {
-
-    }
 
     @Override
     public void onContactFragmentInteraction(Uri uri) {
@@ -189,13 +170,21 @@ public class MainActivity extends Activity
     }
 
     //calender callbacks
-    @Override
-    public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
-        test("adfasdf");
+
+    public class OnCalendarDayClickListener implements ExtendedCalendarView.OnDayClickListener
+
+    {
+        @Override
+        public void onDayClicked (AdapterView < ? > adapter, View view,int position, long id, Day day){
+        test("adfadsfadf");
+        //calenderClickedToMainListener.onDayClicked(adapter,view,position,id,day);
     }
 
-    @Override
-    public void onDayLongClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
+        @Override
+        public void onDayLongClicked (AdapterView < ? > adapter, View view,int position,long id, Day day){
+        //calenderClickedToMainListener.onDayLongClicked(adapter,view,position,id,day);
+    }
 
     }
+
 }

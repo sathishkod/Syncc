@@ -1,9 +1,9 @@
 package gtsarandum.syncc;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +14,16 @@ import android.widget.Toast;
 import com.tyczj.extendedcalendarview.Day;
 import com.tyczj.extendedcalendarview.ExtendedCalendarView;
 
+import java.util.Calendar;
+import java.util.Date;
 
-public class CalendarFragment extends Fragment implements
-        ExtendedCalendarView.OnDayClickListener
+
+public class CalendarFragment extends Fragment
 {
-
-    private OnCalendarFragmentInteractionListener mListener;
 
     private ExtendedCalendarView extendedCalendarView;
     private FrameLayout frameLayout;
 
-    private CalenderClickedToMainListener calenderClickedToMainListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,47 +52,28 @@ public class CalendarFragment extends Fragment implements
 
         if(extendedCalendarView!=null) {
             extendedCalendarView.setGesture(1);
+            extendedCalendarView.setOnDayClickListener(new ExtendedCalendarView.OnDayClickListener() {
+                @Override
+                public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
+                    Calendar calendar=Calendar.getInstance();
+                    calendar.set(Calendar.DAY_OF_MONTH,day.getDay());
+                    calendar.set(Calendar.MONTH, day.getMonth());
+                    calendar.set(Calendar.YEAR,day.getYear());
+
+                    Date date=new Date();
+                    date.setTime(calendar.getTimeInMillis());
+
+                    newEvent(date);
+                }
+
+                @Override
+                public void onDayLongClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
+
+                }
+            });
         } else {
             test("extendedCalendarView=null");
         }
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onCalendarFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnCalendarFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnCalendarFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onCalendarFragmentInteraction(Uri uri);
     }
 
     public CalendarFragment() {}
@@ -102,29 +82,15 @@ public class CalendarFragment extends Fragment implements
         Toast.makeText(getActivity().getApplicationContext(), charSequence, Toast.LENGTH_SHORT).show();
     }
 
-    public ExtendedCalendarView getExtendedCalendarView(){
-        return extendedCalendarView;
-    }
+    private void newEvent(Date d){//update to create activity and give all options to create event
+        Calendar begin =Calendar.getInstance();
+        begin.setTime(d);
 
-    public FrameLayout getFrameLayout(){
-        return frameLayout;
-    }
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setData(CalendarContract.Events.CONTENT_URI);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin.getTimeInMillis());
 
-
-
-    @Override
-    public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
-        calenderClickedToMainListener.onDayClicked(adapter,view,position,id,day);
-    }
-
-    @Override
-    public void onDayLongClicked(AdapterView<?> adapter, View view, int position, long id, Day day){
-        calenderClickedToMainListener.onDayLongClicked(adapter,view,position,id,day);
-    }
-
-    public interface CalenderClickedToMainListener {
-        public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day);
-        public void onDayLongClicked(AdapterView<?> adapter, View view, int position, long id, Day day);
+        startActivity(intent);
     }
 
 }
