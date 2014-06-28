@@ -44,6 +44,10 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        View view=findViewById(R.id.container);
+        View root=view.getRootView();
+        root.setBackgroundColor(getResources().getColor(android.R.color.white));
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();

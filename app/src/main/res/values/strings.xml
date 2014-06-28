@@ -17,5 +17,6 @@
     <string name="title_activity_live_login">LiveLoginActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="create_new_event">Create new event</string>
+    <string name="title_activity_day_events_display">DayEventsDisplayActivity</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package gtsarandum.syncc;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 
 import com.tyczj.extendedcalendarview.Day;
 import com.tyczj.extendedcalendarview.ExtendedCalendarView;
+
+import java.util.Calendar;
 
 
 public class CalendarFragment extends Fragment
@@ -50,7 +53,11 @@ public class CalendarFragment extends Fragment
             extendedCalendarView.setOnDayClickListener(new ExtendedCalendarView.OnDayClickListener() {
                 @Override
                 public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
-                    test("onClick...");
+                    Intent intent=new Intent(getActivity().getApplicationContext(),DayEventsDisplayActivity.class);
+                    Calendar calendar= Calendar.getInstance();
+                    calendar.set(day.getYear(),day.getMonth(),day.getDay());
+                    intent.putExtra(DayEventsDisplayActivity.DAY,calendar.getTimeInMillis());
+                    getActivity().startActivity(intent);
                 }
 
                 @Override

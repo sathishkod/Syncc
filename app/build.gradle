@@ -1,4 +1,13 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
+buildscript {
+    repositories {
+        maven { url 'http://repo1.maven.org/maven2' }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
 
 android {
     compileSdkVersion 19
@@ -25,4 +34,6 @@ dependencies {
     compile 'com.android.support:support-v4:19.+'
     compile project(':extendedCalendarView')
     compile project(':src')
+    compile 'com.github.gabrielemariotti.cards:library:1.7.3'
+    compile 'com.github.gabrielemariotti.cards:library-extra:1.7.3'
 }
