@@ -1,9 +1,12 @@
 package gtsarandum.syncc;
 
+import android.app.ActionBar;
 import android.app.ListFragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -61,6 +64,23 @@ public class ContactFragment extends ListFragment {
             }
         }
 
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        inflater.inflate(R.menu.contact_menu,menu);
+        showGlobalContextActionBar();
+    }
+    private void showGlobalContextActionBar(){
+        ActionBar actionBar = getActivity().getActionBar();
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
     }
 
     @Override
