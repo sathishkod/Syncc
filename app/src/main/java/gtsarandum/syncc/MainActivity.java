@@ -69,6 +69,12 @@ public class MainActivity extends Activity
             case 2://open notes
                 fragment=new NoteFragment();
                 break;
+            case 3://login
+                openLogin();
+                break;
+            case 4://Settings
+                openSettings();
+                break;
             default:break;
         }
 

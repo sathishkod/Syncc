@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -18,8 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -57,12 +59,30 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
+    private ArrayList<NavDrawerItem> navDrawerItems;
+    private String[] navMenuTitles;
+    private String[] navMenuTags;
+    private TypedArray navMenuIcons;
+
     public NavigationDrawerFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // load slide menu items
+        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+
+        // load slide menu tags
+        navMenuTags = getResources().getStringArray(R.array.nav_drawer_tags);
+
+        // nav drawer icons from resources
+        navMenuIcons = getResources()
+                .obtainTypedArray(R.array.nav_drawer_icons);
+
+        navDrawerItems=new ArrayList<NavDrawerItem>();
+
 
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
         // drawer. See PREF_USER_LEARNED_DRAWER for details.
@@ -76,6 +96,8 @@ public class NavigationDrawerFragment extends Fragment {
 
         // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
+
+
     }
 
     @Override
@@ -96,7 +118,9 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+
+
+       /* mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
@@ -106,9 +130,24 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section3),
                         getString(R.string.title_section4),
                         getString(R.string.title_section5)
-                }));
+                }));*/
+
+        fillNavDrawerItems();
+        mDrawerListView.setAdapter(new NavigationDrawerAdapter(
+                getActionBar().getThemedContext(),
+                navDrawerItems
+        ));
+
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
+    }
+
+    private void fillNavDrawerItems(){
+        if (navMenuTitles.length==navMenuIcons.length() && navMenuTags.length==navMenuIcons.length()){
+            for (int i=0;i<navMenuTitles.length;i++){
+                navDrawerItems.add(new NavDrawerItem(navMenuTitles[i],navMenuTags[i],navMenuIcons.getResourceId(i, -1)));
+            }
+        }
     }
 
     public boolean isDrawerOpen() {
