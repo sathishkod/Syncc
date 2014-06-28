@@ -1,68 +1,78 @@
 package gtsarandum.syncc;
 
-import android.app.Activity;
-import android.net.Uri;
+import android.app.ListFragment;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.view.LayoutInflater;
+import android.provider.ContactsContract;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
 
-public class ContactFragment extends Fragment {
+public class ContactFragment extends ListFragment {
 
-    private OnContactFragmentInteractionListener mListener;
+    ContactAdapter contactAdapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        contactAdapter=new ContactAdapter(getActivity().getApplicationContext());
+
+        //setListAdapter
+        setListAdapter(contactAdapter);
+
+        fillView();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact, container, false);
-    }
+    private void fillView(){
+        Cursor cursor=getActivity().getContentResolver().query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                new String[]{
+                    ContactsContract.CommonDataKinds.Phone._ID,//0
+                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,//1
+                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID,//2
+                    ContactsContract.CommonDataKinds.Phone.HAS_PHONE_NUMBER,//3
+                    ContactsContract.CommonDataKinds.Phone.NUMBER,//4
+                    ContactsContract.Contacts.PHOTO_ID,//5
+                    ContactsContract.Contacts.PHOTO_THUMBNAIL_URI,//6
+                    ContactsContract.Contacts.PHOTO_URI},//7
+                null,
+                null,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" ASC");
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onContactFragmentInteraction(uri);
+        char cmp=' ';
+        String name;
+        String photo;
+
+        if (cursor!=null && cursor.moveToFirst()){
+            for (int i=0;i<cursor.getCount();i++){
+                name=cursor.getString(1);
+                photo=cursor.getString(6);
+                if (cmp<name.charAt(0)){
+                    cmp=name.charAt(0);
+                    contactAdapter.addSectionHeaderItem(String.valueOf(cmp));
+                }
+
+                contactAdapter.addItem(name);
+
+                cursor.moveToNext();
+            }
         }
+
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnContactFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnContactFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onContactFragmentInteraction(Uri uri);
     }
 
     public ContactFragment() {}
+    //makes a toast that says the given charSequence
+    public void test(CharSequence charSequence){
+        Toast.makeText(getActivity().getApplicationContext(), charSequence, Toast.LENGTH_SHORT).show();
+    }
+
 }

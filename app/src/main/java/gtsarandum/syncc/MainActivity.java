@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v4.widget.DrawerLayout;
@@ -23,9 +22,7 @@ import java.util.Calendar;
 
 public class MainActivity extends Activity
         implements
-        NavigationDrawerFragment.NavigationDrawerCallbacks,
-        ContactFragment.OnContactFragmentInteractionListener,
-        NoteFragment.OnNoteFragmentInteractionListener
+        NavigationDrawerFragment.NavigationDrawerCallbacks
 
 {
 
@@ -133,12 +130,6 @@ public class MainActivity extends Activity
             case R.id.action_settings://settings
                 openSettings();
                 break;
-            case R.id.login:
-                openLogin();
-                break;
-            case R.id.logout:
-                logout();
-                break;
             case R.id.action_new_event:
                 newEvent();
                 break;
@@ -174,19 +165,6 @@ public class MainActivity extends Activity
     //makes a toast that says the given charSequence
     public void test(CharSequence charSequence){
         Toast.makeText(getApplicationContext(),charSequence,Toast.LENGTH_SHORT).show();
-    }
-
-
-    //interface methods
-
-    @Override
-    public void onContactFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onNoteFragmentInteraction(Uri uri) {
-
     }
 
     //calender callbacks

@@ -3,11 +3,14 @@ package gtsarandum.syncc;
 /**
  * Created by Nicolas on 27.06.2014.
  */
+
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ class ContactAdapter extends BaseAdapter {
     private static final int TYPE_SEPARATOR = 1;
 
     private ArrayList<String> mData = new ArrayList<String>();
+    private ArrayList<Uri> photos=new ArrayList<Uri>();
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
     private LayoutInflater mInflater;
@@ -33,8 +37,10 @@ class ContactAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void addItem(int id){
-
+    public void addItem(final String item, Uri uri){
+        mData.add(item);
+        photos.add(uri);
+        notifyDataSetChanged();
     }
 
     public void addSectionHeaderItem(final String item) {
@@ -75,9 +81,11 @@ class ContactAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             switch (rowType) {
+
                 case TYPE_ITEM:
                     convertView = mInflater.inflate(R.layout.snippet_item1, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.text);
+                    holder.imageView=(ImageView)convertView.findViewById(R.id.contact_image);
                     break;
                 case TYPE_SEPARATOR:
                     convertView = mInflater.inflate(R.layout.snippet_item2, null);
@@ -89,12 +97,15 @@ class ContactAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.textView.setText(mData.get(position));
-
+        /*if (holder.imageView!=null && photos.get(position)!=null){
+            holder.imageView.setImageURI(photos.get(position));
+        }*/
         return convertView;
     }
 
     public static class ViewHolder {
         public TextView textView;
+        public ImageView imageView;
     }
 
 }
