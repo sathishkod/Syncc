@@ -2,6 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity" >
 
+    <item
+        android:id="@+id/action_new_event"
+        android:icon="@drawable/ic_action_new_event"
+        android:title="@string/create_new_event"
+        android:showAsAction="always"
+        />
+
     <item android:id="@+id/login"
         android:title="@string/login"
         android:showAsAction="never" />

@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import com.tyczj.extendedcalendarview.Day;
 import com.tyczj.extendedcalendarview.ExtendedCalendarView;
+
+import java.util.Calendar;
 
 
 public class MainActivity extends Activity
@@ -132,10 +135,23 @@ public class MainActivity extends Activity
             case R.id.logout:
                 logout();
                 break;
+            case R.id.action_new_event:
+                newEvent();
+                break;
             default:break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void newEvent(){//update to create activity and give all options to create event
+        Calendar begin =Calendar.getInstance();
+
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setData(CalendarContract.Events.CONTENT_URI);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin.getTimeInMillis());
+
+        startActivity(intent);
     }
 
     private void openSettings(){

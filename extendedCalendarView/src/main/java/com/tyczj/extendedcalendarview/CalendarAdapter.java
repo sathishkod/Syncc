@@ -1,12 +1,5 @@
 package com.tyczj.extendedcalendarview;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.Set;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
-
 import android.content.Context;
 import android.text.format.Time;
 import android.view.LayoutInflater;
@@ -17,6 +10,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.Set;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 public class CalendarAdapter extends BaseAdapter{
 	
@@ -184,7 +184,7 @@ public class CalendarAdapter extends BaseAdapter{
     	dayList.clear();
     	
     	int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH)+7;
-        int firstDay = (int)cal.get(Calendar.DAY_OF_WEEK);
+        int firstDay = cal.get(Calendar.DAY_OF_WEEK);
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         TimeZone tz = TimeZone.getDefault();

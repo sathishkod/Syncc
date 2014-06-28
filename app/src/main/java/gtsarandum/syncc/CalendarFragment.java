@@ -1,9 +1,7 @@
 package gtsarandum.syncc;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +11,6 @@ import android.widget.Toast;
 
 import com.tyczj.extendedcalendarview.Day;
 import com.tyczj.extendedcalendarview.ExtendedCalendarView;
-
-import java.util.Calendar;
-import java.util.Date;
 
 
 public class CalendarFragment extends Fragment
@@ -55,15 +50,7 @@ public class CalendarFragment extends Fragment
             extendedCalendarView.setOnDayClickListener(new ExtendedCalendarView.OnDayClickListener() {
                 @Override
                 public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
-                    Calendar calendar=Calendar.getInstance();
-                    calendar.set(Calendar.DAY_OF_MONTH,day.getDay());
-                    calendar.set(Calendar.MONTH, day.getMonth());
-                    calendar.set(Calendar.YEAR,day.getYear());
-
-                    Date date=new Date();
-                    date.setTime(calendar.getTimeInMillis());
-
-                    newEvent(date);
+                    test("onClick...");
                 }
 
                 @Override
@@ -82,15 +69,6 @@ public class CalendarFragment extends Fragment
         Toast.makeText(getActivity().getApplicationContext(), charSequence, Toast.LENGTH_SHORT).show();
     }
 
-    private void newEvent(Date d){//update to create activity and give all options to create event
-        Calendar begin =Calendar.getInstance();
-        begin.setTime(d);
 
-        Intent intent = new Intent(Intent.ACTION_INSERT);
-        intent.setData(CalendarContract.Events.CONTENT_URI);
-        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin.getTimeInMillis());
-
-        startActivity(intent);
-    }
 
 }
