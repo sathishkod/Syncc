@@ -16,6 +16,7 @@
     <string name="title_activity_day_events_display">Events</string>
     <string name="action_settings">Settings</string>
     <string name="action_add_person">Create new contact</string>
+    <string name="action_accept">Accept</string>
 
     <string-array name="nav_drawer_items">
         <item>Calendar</item>
@@ -24,13 +25,14 @@
         <item>Login</item>
         <item>Settings</item>
     </string-array>
-
     <string-array name="nav_drawer_tags">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
     </string-array>
+
+    <string name="title_activity_create_new_event">New event</string>
 
 </resources>
