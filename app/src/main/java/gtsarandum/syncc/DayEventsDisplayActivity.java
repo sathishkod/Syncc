@@ -55,6 +55,7 @@ public class DayEventsDisplayActivity extends Activity {
         cardArrayAdapter=new CardArrayAdapter(getApplicationContext(),cards);
 
         cardListView.setAdapter(cardArrayAdapter);
+
     }
 
 

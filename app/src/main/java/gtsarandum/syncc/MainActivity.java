@@ -136,7 +136,7 @@ public class MainActivity extends Activity
             case R.id.action_settings://settings
                 openSettings();
                 break;
-            case R.id.action_new_event:
+            case R.id.action_new_event://new event
                 newEvent();
                 break;
             default:break;
@@ -147,7 +147,6 @@ public class MainActivity extends Activity
 
     private void newEvent(){//update to create activity and give all options to create event
         Calendar begin =Calendar.getInstance();
-
         Intent intent = new Intent(Intent.ACTION_INSERT);
         intent.setData(CalendarContract.Events.CONTENT_URI);
         intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin.getTimeInMillis());

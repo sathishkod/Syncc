@@ -53,6 +53,7 @@ public class LiveLoginActivity extends Activity {
             this.resultTextView=resultTextView;
         }
 
+
         public void onAuthComplete(LiveStatus status, LiveConnectSession session, Object userState) {
             if(status == LiveStatus.CONNECTED) {
                 this.resultTextView.setText("Signed in.");
