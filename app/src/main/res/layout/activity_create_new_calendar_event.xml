@@ -51,7 +51,7 @@
         android:paddingTop="2dp"
         android:text="@string/from"
         android:textIsSelectable="false"
-        android:textColor="@android:color/secondary_text_dark"
+        android:textColor="@color/secondary_text"
         android:id="@+id/from"
         />
 
@@ -89,7 +89,7 @@
         android:text="@string/to"
         android:paddingTop="2dp"
         android:textIsSelectable="false"
-        android:textColor="@android:color/secondary_text_dark"
+        android:textColor="@color/secondary_text"
         />
 
 
@@ -126,7 +126,7 @@
         android:id="@+id/all_day_check"
         android:text="@string/event_all_day"
         android:layout_below="@id/to_time"
-        android:textColor="@android:color/secondary_text_dark_nodisable"
+        android:textColor="@color/secondary_text"
         />
 
 
@@ -135,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/all_day_check"
         android:text="@string/repetition"
-        android:textColor="@android:color/secondary_text_dark_nodisable"
+        android:textColor="@color/secondary_text"
         android:paddingTop="2dp"
         android:id="@+id/repetition"
         />
@@ -153,13 +153,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/reminder"
         android:layout_below="@id/repetition_spinner"
-        android:textColor="@android:color/secondary_text_dark_nodisable"
+        android:textColor="@color/secondary_text"
         android:text="@string/reminders"
         />
 
     <!-- reminder_spinner -->
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/reminder_spinner"
         android:layout_below="@id/reminder"

@@ -57,4 +57,13 @@
 
     <color name="pink_a700">#c51162</color>
 
+    <!-- text colors -->
+    <color name="primary_text">#212121</color>
+
+    <color name="secondary_text">#757575</color>
+
+    <color name="hint_text">#bdbdbd</color>
+
+    <color name="divider">#e0e0e0</color>
+
 </resources>
