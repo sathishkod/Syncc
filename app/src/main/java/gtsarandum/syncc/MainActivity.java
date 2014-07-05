@@ -150,7 +150,6 @@ public class MainActivity extends Activity
     }
 
     private void openSettings(){
-
     }
 
     private void openLogin(){
