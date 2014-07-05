@@ -4,11 +4,23 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 public class CreateNewCalendarEventActivity extends Activity {
 
     ScrollView scrollView;
+    EditText title;//event_title_edit_text
+    EditText location;//event_location_edit_text
+    TextView datePicker;//from_date_picker
+    //from_time_picker
+    //to_date_picker
+    //to_time_picker
+    //all_day_check
+    //repetition_spinner
+    //reminder_spinner
+    //description_edit_text
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
