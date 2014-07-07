@@ -25,8 +25,9 @@
     <string name="event_guests">Guests</string>
     <string name="from">From</string>
     <string name="to">To</string>
-    <string name="repetition">Repetition</string>
+    <string name="repetition">Recurrence</string>
     <string name="reminders">Reminders</string>
+    <string name="set_recurrence">Set recurrence for event</string>
 
     <string-array name="repetition_options">
         <item>none</item>
@@ -89,5 +90,6 @@
     <string name="title_activity_create_new_event">New event</string>
     <string name="title_activity_create_new_calendar_event">Create new event</string>
     <string name="hello_world">Hello world!</string>
+    <string name="action_cancel">Cancel</string>
 
 </resources>

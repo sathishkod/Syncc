@@ -1,6 +1,9 @@
 package gtsarandum.syncc;
 
+import android.content.ContentValues;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,10 +16,12 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
 import com.doomonafireball.betterpickers.radialtimepicker.RadialPickerLayout;
 import com.doomonafireball.betterpickers.radialtimepicker.RadialTimePickerDialog;
+import com.doomonafireball.betterpickers.recurrencepicker.RecurrencePickerDialog;
 
 import java.util.Calendar;
 
@@ -31,15 +36,15 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
     private TextView toDatePicker;                      //to_date_picker - onclicklistener and text
     private TextView toTimePicker;                      //to_time_picker - onclicklistener and text
     private CheckBox allDayCheck;                       //all_day_check - onstatechangedlistener
-    private Spinner repetitionSpinner;                  //repetition_spinner - fill with items through adapter
     private Spinner reminderSpinner;                    //reminder_spinner - fill with items through adapter
     private EditText descriptionEditText;               //description_edit_text
+    private TextView recurrence;
 
     //necessary variables for view elements
     private Calendar fromDateTimeValue;
     private Calendar toDateTimeValue;
     private boolean allDayCheckValue;
-    private int reminderPosition, repetitionPosition;
+    private int reminderPosition;
 
 
     @Override
@@ -59,9 +64,9 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
         toDatePicker=(TextView) scrollView.findViewById(R.id.to_date_picker);
         toTimePicker=(TextView) scrollView.findViewById(R.id.to_time_picker);
         allDayCheck=(CheckBox) scrollView.findViewById(R.id.all_day_check);
-        repetitionSpinner=(Spinner) scrollView.findViewById(R.id.repetition_spinner);
         reminderSpinner=(Spinner) scrollView.findViewById(R.id.reminder_spinner);
         descriptionEditText=(EditText) scrollView.findViewById(R.id.description_edit_text);
+        recurrence=(TextView) scrollView.findViewById(R.id.recurrence);
 
         //init values
         fromDateTimeValue=Calendar.getInstance();
@@ -69,35 +74,21 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
         toDateTimeValue.set(Calendar.HOUR, fromDateTimeValue.get(Calendar.HOUR)+1); //Termin geht default eine stunde lang
         allDayCheckValue=false;
         reminderPosition=0;
-        repetitionPosition=0;
 
-        //adapter for spinners
+        //fill date and time pickers and recurrende with text
+        updatePickers();
+        recurrence.setText(getResources().getString(R.string.set_recurrence));
+        updateRecurrence("");
+
+        //adapter for spinner
         reminderSpinner.setAdapter(ArrayAdapter.createFromResource(getApplicationContext(),
                 R.array.reminder_options, R.layout.custom_spinner_item));
 
-        repetitionSpinner.setAdapter(ArrayAdapter.createFromResource(getApplicationContext(),
-                R.array.repetition_options, R.layout.custom_spinner_item));
-
-        //fill date and time pickers with text
-        updatePickers();
-
-        //onItemSelected for spinners
+        //onItemSelected for spinner
         reminderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 reminderPosition=position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        repetitionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                repetitionPosition=position;
             }
 
             @Override
@@ -173,6 +164,20 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
             }
         });
 
+        recurrence.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RecurrencePickerDialog recurrencePickerDialog=new RecurrencePickerDialog();
+                recurrencePickerDialog.setOnRecurrenceSetListener(new RecurrencePickerDialog.OnRecurrenceSetListener() {
+                    @Override
+                    public void onRecurrenceSet(String s) {
+                        updateRecurrence(s);
+                    }
+                });
+                recurrencePickerDialog.show(getSupportFragmentManager(),"tag");
+            }
+        });
+
         //set listener for checkbox
         allDayCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -195,16 +200,13 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
         if(fromDateTimeValue.getTimeInMillis()>toDateTimeValue.getTimeInMillis()){
             toDateTimeValue.setTimeInMillis(fromDateTimeValue.getTimeInMillis());
         }
-        updateFromPickers();
-        updateToPickers();
-    }
 
-    private void updateFromPickers(){
         String date;
         String time;
 
         String [] months=getResources().getStringArray(R.array.month_short);
 
+        //fromDateTime
         date=fromDateTimeValue.get(Calendar.DAY_OF_MONTH)+" "
                 +months[fromDateTimeValue.get(Calendar.MONTH)]+" "
                 +fromDateTimeValue.get(Calendar.YEAR);
@@ -215,14 +217,8 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
                 +fromDateTimeValue.get(Calendar.MINUTE);
 
         fromTimePicker.setText(time);
-    }
 
-    private void updateToPickers(){
-        String date;
-        String time;
-
-        String[] months=getResources().getStringArray(R.array.month_short);
-
+        //toDateTime
         date=toDateTimeValue.get(Calendar.DAY_OF_MONTH)+" "
                 +months[toDateTimeValue.get(Calendar.MONTH)]+" "
                 +toDateTimeValue.get(Calendar.YEAR);
@@ -233,7 +229,10 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
                 +toDateTimeValue.get(Calendar.MINUTE);
 
         toTimePicker.setText(time);
+    }
 
+    private void updateRecurrence(String s){
+        Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -250,6 +249,9 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
             case R.id.action_accept:
                 saveCalendarEvent();
                 break;
+            case R.id.action_cancel:
+                finish();
+                break;
             default:break;
         }
 
@@ -257,6 +259,20 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
     }
 
     private void saveCalendarEvent(){
+
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(CalendarContract.Events.TITLE,eventTitleEditText.getText().toString());
+        contentValues.put(CalendarContract.Events.EVENT_LOCATION,eventLocationEditText.getText().toString());
+        contentValues.put(CalendarContract.Events.DTSTART,fromDateTimeValue.getTimeInMillis());
+        contentValues.put(CalendarContract.Events.DTEND,toDateTimeValue.getTimeInMillis());
+        contentValues.put(CalendarContract.Events.ALL_DAY,allDayCheckValue);
+        contentValues.put(CalendarContract.Events.DESCRIPTION,descriptionEditText.getText().toString());
+
+        Uri uri=getContentResolver().insert(CalendarContract.Events.CONTENT_URI,contentValues);
+
+
+
+
         finish();
     }
 }
