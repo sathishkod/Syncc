@@ -145,11 +145,21 @@
         android:textColor="@color/secondary_text"
         />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recurrence_text"
+        android:layout_below="@id/all_day_check"
+        android:textColor="@color/secondary_text"
+        android:text="@string/repetition"
+        />
+
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/all_day_check"
+        android:layout_below="@id/recurrence_text"
         android:textColor="@color/primary_text"
         android:id="@+id/recurrence"
         android:textSize="18sp"

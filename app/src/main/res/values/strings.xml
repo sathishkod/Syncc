@@ -28,6 +28,7 @@
     <string name="repetition">Recurrence</string>
     <string name="reminders">Reminders</string>
     <string name="set_recurrence">Set recurrence for event</string>
+    <string name="no_recurrence">No recurrence set</string>
 
     <string-array name="repetition_options">
         <item>none</item>
