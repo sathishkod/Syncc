@@ -248,6 +248,7 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
                 +toDateTimeValue.get(Calendar.MINUTE);
 
         toTimePicker.setText(time);
+
     }
 
     @Override
