@@ -69,6 +69,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:id="@+id/from_date_picker"
+            android:textSize="18sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
             />
 
         <!-- from_time_picker -->
@@ -77,6 +81,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/from_time_picker"
+            android:textSize="18sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
             />
 
         </LinearLayout>
@@ -107,6 +115,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:id="@+id/to_date_picker"
+            android:textSize="18sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
             />
 
         <!-- to_time_picker -->
@@ -115,6 +127,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/to_time_picker"
+            android:textSize="18sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
             />
 
     </LinearLayout>

@@ -1,7 +1,7 @@
 package gtsarandum.syncc;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +14,13 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class CreateNewCalendarEventActivity extends Activity {
+import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
+import com.doomonafireball.betterpickers.radialtimepicker.RadialPickerLayout;
+import com.doomonafireball.betterpickers.radialtimepicker.RadialTimePickerDialog;
+
+import java.util.Calendar;
+
+public class CreateNewCalendarEventActivity extends FragmentActivity {
 
     //elements inside the view
     private ScrollView scrollView;
@@ -30,7 +36,10 @@ public class CreateNewCalendarEventActivity extends Activity {
     private EditText descriptionEditText;               //description_edit_text
 
     //necessary variables for view elements
-
+    private Calendar fromDateTimeValue;
+    private Calendar toDateTimeValue;
+    private boolean allDayCheckValue;
+    private int reminderPosition, repetitionPosition;
 
 
     @Override
@@ -54,6 +63,14 @@ public class CreateNewCalendarEventActivity extends Activity {
         reminderSpinner=(Spinner) scrollView.findViewById(R.id.reminder_spinner);
         descriptionEditText=(EditText) scrollView.findViewById(R.id.description_edit_text);
 
+        //init values
+        fromDateTimeValue=Calendar.getInstance();
+        toDateTimeValue=Calendar.getInstance();
+        toDateTimeValue.set(Calendar.HOUR, fromDateTimeValue.get(Calendar.HOUR)+1); //Termin geht default eine stunde lang
+        allDayCheckValue=false;
+        reminderPosition=0;
+        repetitionPosition=0;
+
         //adapter for spinners
         reminderSpinner.setAdapter(ArrayAdapter.createFromResource(getApplicationContext(),
                 R.array.reminder_options, R.layout.custom_spinner_item));
@@ -61,26 +78,48 @@ public class CreateNewCalendarEventActivity extends Activity {
         repetitionSpinner.setAdapter(ArrayAdapter.createFromResource(getApplicationContext(),
                 R.array.repetition_options, R.layout.custom_spinner_item));
 
+        //fill date and time pickers with text
+        updatePickers();
+
         //onItemSelected for spinners
-        reminderSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        reminderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //change value
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                reminderPosition=position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        repetitionSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        repetitionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //chane value
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                repetitionPosition=position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        //onClickListener for TextViews
+        //onClickListener for TextView
         fromDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //open datepicker and change text in TextView
+                CalendarDatePickerDialog calendarDatePickerDialog=new CalendarDatePickerDialog();
+                calendarDatePickerDialog.setOnDateSetListener(new CalendarDatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog, int i, int i2, int i3) {
+                        fromDateTimeValue.set(i,i2,i3);
+                        updatePickers();
+                    }
+                });
+                calendarDatePickerDialog.show(getSupportFragmentManager(),"tag");
             }
         });
 
@@ -88,6 +127,16 @@ public class CreateNewCalendarEventActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //open timepicker and change text in TextView
+                RadialTimePickerDialog radialTimePickerDialog=new RadialTimePickerDialog();
+                radialTimePickerDialog.setOnTimeSetListener(new RadialTimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i2) {
+                        fromDateTimeValue.set(Calendar.HOUR_OF_DAY,i);
+                        fromDateTimeValue.set(Calendar.MINUTE,i2);
+                        updatePickers();
+                    }
+                });
+                radialTimePickerDialog.show(getSupportFragmentManager(),"tag");
             }
         });
 
@@ -95,6 +144,15 @@ public class CreateNewCalendarEventActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //open datepicker and chane text in TextView
+                CalendarDatePickerDialog calendarDatePickerDialog=new CalendarDatePickerDialog();
+                calendarDatePickerDialog.setOnDateSetListener(new CalendarDatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog, int i, int i2, int i3) {
+                        toDateTimeValue.set(i,i2,i3);
+                        updatePickers();
+                    }
+                });
+                calendarDatePickerDialog.show(getSupportFragmentManager(),"tag");
             }
         });
 
@@ -102,6 +160,16 @@ public class CreateNewCalendarEventActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //open timepicker and change text in TextView
+                RadialTimePickerDialog radialTimePickerDialog=new RadialTimePickerDialog();
+                radialTimePickerDialog.setOnTimeSetListener(new RadialTimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i2) {
+                        toDateTimeValue.set(Calendar.HOUR_OF_DAY,i);
+                        toDateTimeValue.set(Calendar.MINUTE,i2);
+                        updatePickers();
+                    }
+                });
+                radialTimePickerDialog.show(getSupportFragmentManager(),"tag");
             }
         });
 
@@ -110,8 +178,76 @@ public class CreateNewCalendarEventActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //set value for dedicated boolean
+                if(isChecked){
+                    allDayCheckValue=true;
+                    fromTimePicker.setVisibility(View.GONE);
+                    toTimePicker.setVisibility(View.GONE);
+                } else {
+                    allDayCheckValue=false;
+                    fromTimePicker.setVisibility(View.VISIBLE);
+                    toTimePicker.setVisibility(View.VISIBLE);
+                }
             }
         });
+    }
+
+    private void updatePickers(){
+        Calendar begin=Calendar.getInstance();
+        begin.set(fromDateTimeValue.get(Calendar.YEAR),
+                fromDateTimeValue.get(Calendar.MONTH),
+                fromDateTimeValue.get(Calendar.DAY_OF_MONTH),
+                fromDateTimeValue.get(Calendar.HOUR_OF_DAY),
+                fromDateTimeValue.get(Calendar.MINUTE),
+                fromDateTimeValue.get(Calendar.SECOND));
+        Calendar end=Calendar.getInstance();
+        end.set(toDateTimeValue.get(Calendar.YEAR),
+                toDateTimeValue.get(Calendar.MONTH),
+                toDateTimeValue.get(Calendar.DAY_OF_MONTH),
+                toDateTimeValue.get(Calendar.HOUR_OF_DAY),
+                toDateTimeValue.get(Calendar.MINUTE),
+                toDateTimeValue.get(Calendar.SECOND));
+
+        if (end.getTimeInMillis()<begin.getTimeInMillis()){ //vergleich der tage
+            toDateTimeValue.setTimeInMillis(begin.getTimeInMillis());
+        }
+        updateFromPickers();
+        updateToPickers();
+    }
+
+    private void updateFromPickers(){
+        String date;
+        String time;
+
+        String [] months=getResources().getStringArray(R.array.month_short);
+
+        date=fromDateTimeValue.get(Calendar.DAY_OF_MONTH)+" "
+                +months[fromDateTimeValue.get(Calendar.MONTH)]+" "
+                +fromDateTimeValue.get(Calendar.YEAR);
+
+        fromDatePicker.setText(date);
+
+        time=fromDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                +fromDateTimeValue.get(Calendar.MINUTE);
+
+        fromTimePicker.setText(time);
+    }
+
+    private void updateToPickers(){
+        String date;
+        String time;
+
+        String[] months=getResources().getStringArray(R.array.month_short);
+
+        date=toDateTimeValue.get(Calendar.DAY_OF_MONTH)+" "
+                +months[toDateTimeValue.get(Calendar.MONTH)]+" "
+                +toDateTimeValue.get(Calendar.YEAR);
+
+        toDatePicker.setText(date);
+
+        time=toDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                +toDateTimeValue.get(Calendar.MINUTE);
+
+        toTimePicker.setText(time);
     }
 
     @Override
