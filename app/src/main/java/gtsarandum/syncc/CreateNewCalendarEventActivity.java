@@ -192,23 +192,8 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
     }
 
     private void updatePickers(){
-        Calendar begin=Calendar.getInstance();
-        begin.set(fromDateTimeValue.get(Calendar.YEAR),
-                fromDateTimeValue.get(Calendar.MONTH),
-                fromDateTimeValue.get(Calendar.DAY_OF_MONTH),
-                fromDateTimeValue.get(Calendar.HOUR_OF_DAY),
-                fromDateTimeValue.get(Calendar.MINUTE),
-                fromDateTimeValue.get(Calendar.SECOND));
-        Calendar end=Calendar.getInstance();
-        end.set(toDateTimeValue.get(Calendar.YEAR),
-                toDateTimeValue.get(Calendar.MONTH),
-                toDateTimeValue.get(Calendar.DAY_OF_MONTH),
-                toDateTimeValue.get(Calendar.HOUR_OF_DAY),
-                toDateTimeValue.get(Calendar.MINUTE),
-                toDateTimeValue.get(Calendar.SECOND));
-
-        if (end.getTimeInMillis()<begin.getTimeInMillis()){ //vergleich der tage
-            toDateTimeValue.setTimeInMillis(begin.getTimeInMillis());
+        if(fromDateTimeValue.getTimeInMillis()>toDateTimeValue.getTimeInMillis()){
+            toDateTimeValue.setTimeInMillis(fromDateTimeValue.getTimeInMillis());
         }
         updateFromPickers();
         updateToPickers();
