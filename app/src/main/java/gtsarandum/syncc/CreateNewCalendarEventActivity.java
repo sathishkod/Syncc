@@ -1,6 +1,8 @@
 package gtsarandum.syncc;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -9,12 +11,10 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,13 +39,15 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
     private TextView toDatePicker;                      //to_date_picker - onclicklistener and text
     private TextView toTimePicker;                      //to_time_picker - onclicklistener and text
     private CheckBox allDayCheck;                       //all_day_check - onstatechangedlistener
-    private Spinner reminderSpinner;                    //reminder_spinner - fill with items through adapter
     private EditText descriptionEditText;               //description_edit_text
     private TextView recurrence;
+    private TextView time1, time2;
+    private TextView reminderDate, reminderTime;
 
     //necessary variables for view elements
     private Calendar fromDateTimeValue;
     private Calendar toDateTimeValue;
+    private Calendar reminderValue;
     private boolean allDayCheckValue;
     private int reminderPosition;
     private EventRecurrence eventRecurrence;
@@ -66,38 +68,26 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
         toDatePicker=(TextView) scrollView.findViewById(R.id.to_date_picker);
         toTimePicker=(TextView) scrollView.findViewById(R.id.to_time_picker);
         allDayCheck=(CheckBox) scrollView.findViewById(R.id.all_day_check);
-        reminderSpinner=(Spinner) scrollView.findViewById(R.id.reminder_spinner);
         descriptionEditText=(EditText) scrollView.findViewById(R.id.description_edit_text);
         recurrence=(TextView) scrollView.findViewById(R.id.recurrence);
+        time1=(TextView) scrollView.findViewById(R.id.time_1);
+        time2=(TextView) scrollView.findViewById(R.id.time_2);
+        reminderDate=(TextView) scrollView.findViewById(R.id.reminder_date);
+        reminderTime=(TextView) scrollView.findViewById(R.id.reminder_time);
 
         //init values
         fromDateTimeValue=Calendar.getInstance();
         toDateTimeValue=Calendar.getInstance();
+        reminderValue=Calendar.getInstance();
         toDateTimeValue.set(Calendar.HOUR, fromDateTimeValue.get(Calendar.HOUR)+1); //Termin geht default eine stunde lang
         allDayCheckValue=false;
         reminderPosition=0;
         eventRecurrence=new EventRecurrence();
 
+
         //fill date and time pickers and recurrende with text
         updatePickers();
         recurrence.setText(getResources().getString(R.string.set_recurrence));
-
-        //adapter for spinner
-        /*reminderSpinner.setAdapter(ArrayAdapter.createFromResource(getApplicationContext(),
-                R.array.reminder_options, R.layout.custom_spinner_item));*/
-
-        //onItemSelected for spinner
-        reminderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                reminderPosition=position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         //onClickListener for TextView
         fromDatePicker.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +176,36 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
             }
         });
 
+        reminderDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext());
+                builder.setItems(getResources().getStringArray(R.array.reminder_date_options),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO
+                            }
+                        });
+                builder.show();
+            }
+        });
+
+        reminderTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext());
+                builder.setItems(getResources().getStringArray(R.array.reminder_time_options),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO
+                            }
+                        });
+                builder.show();
+            }
+        });
+
         //set listener for checkbox
         allDayCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -195,10 +215,14 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
                     allDayCheckValue=true;
                     fromTimePicker.setVisibility(View.GONE);
                     toTimePicker.setVisibility(View.GONE);
+                    time1.setVisibility(View.GONE);
+                    time2.setVisibility(View.GONE);
                 } else {
                     allDayCheckValue=false;
                     fromTimePicker.setVisibility(View.VISIBLE);
                     toTimePicker.setVisibility(View.VISIBLE);
+                    time1.setVisibility(View.VISIBLE);
+                    time2.setVisibility(View.VISIBLE);
                 }
             }
         });
