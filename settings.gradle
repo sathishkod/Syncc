@@ -1,2 +1,2 @@
-include ':app', ':src'
+include ':app', ':src', ':Calendar'
 include ':extendedCalendarView'
