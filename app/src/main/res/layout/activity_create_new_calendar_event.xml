@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:id="@+id/scrollview"
+    android:background="@android:color/white"
     >
 
     <!-- important ids -->
@@ -56,11 +57,38 @@
         />
 
     <LinearLayout
+        android:id="@+id/date_time_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/from">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/date"
+            android:paddingTop="2dp"
+            android:textColor="@color/secondary_text"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/time"
+            android:paddingTop="2dp"
+            android:textColor="@color/secondary_text"
+            />
+
+        </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/from_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/from"
+        android:layout_below="@id/date_time_1"
         >
 
         <!-- from_date_picker -->
@@ -102,13 +130,40 @@
         android:textColor="@color/secondary_text"
         />
 
+    <LinearLayout
+        android:id="@+id/date_time_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/to">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/date"
+            android:paddingTop="2dp"
+            android:textColor="@color/secondary_text"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/time"
+            android:paddingTop="2dp"
+            android:textColor="@color/secondary_text"
+            />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/to_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/to"
+        android:layout_below="@id/date_time_2"
         >
 
         <!-- to_date_picker -->
@@ -183,13 +238,43 @@
         android:text="@string/reminders"
         />
 
+    <LinearLayout
+        android:id="@+id/date_time_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/reminder">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/date"
+            android:paddingTop="2dp"
+            android:textColor="@color/secondary_text"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/time"
+            android:paddingTop="2dp"
+            android:textColor="@color/secondary_text"
+            />
+
+    </LinearLayout>
+
     <!-- reminder_spinner -->
+
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/reminder_spinner"
-        android:layout_below="@id/reminder"
+        android:layout_below="@id/date_time_3"
         />
+
+
 
     <!-- description_edit_text -->
     <EditText

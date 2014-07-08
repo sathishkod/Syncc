@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_accept"
         android:title="@string/action_accept"
-        android:showAsAction="always"
+        android:showAsAction="always|collapseActionView"
         android:icon="@drawable/ic_action_accept"
         android:orderInCategory="2"
         />
@@ -13,7 +13,7 @@
     <item
         android:id="@+id/action_cancel"
         android:title="@string/action_cancel"
-        android:showAsAction="always"
+        android:showAsAction="always|collapseActionView"
         android:icon="@drawable/ic_action_cancel"
         android:orderInCategory="1"
         />

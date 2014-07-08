@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -56,7 +55,6 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         scrollView=(ScrollView)getLayoutInflater().inflate(R.layout.activity_create_new_calendar_event,null,false);
         setContentView(scrollView);
-
         init();
     }
     private void init(){
@@ -85,8 +83,8 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
         recurrence.setText(getResources().getString(R.string.set_recurrence));
 
         //adapter for spinner
-        reminderSpinner.setAdapter(ArrayAdapter.createFromResource(getApplicationContext(),
-                R.array.reminder_options, R.layout.custom_spinner_item));
+        /*reminderSpinner.setAdapter(ArrayAdapter.createFromResource(getApplicationContext(),
+                R.array.reminder_options, R.layout.custom_spinner_item));*/
 
         //onItemSelected for spinner
         reminderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
