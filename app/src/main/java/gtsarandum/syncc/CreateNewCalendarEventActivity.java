@@ -276,6 +276,7 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
     private void saveCalendarEvent(){
 
         ContentValues contentValues=new ContentValues();
+        //information for the event
         contentValues.put(CalendarContract.Events.TITLE,eventTitleEditText.getText().toString());
         contentValues.put(CalendarContract.Events.EVENT_LOCATION,eventLocationEditText.getText().toString());
         contentValues.put(CalendarContract.Events.DTSTART,fromDateTimeValue.getTimeInMillis());
@@ -284,11 +285,13 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
         contentValues.put(CalendarContract.Events.DESCRIPTION,descriptionEditText.getText().toString());
         contentValues.put(CalendarContract.Events.CALENDAR_ID,1);
         contentValues.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
-
+        //insert event into calendar
         Uri uri=getContentResolver().insert(CalendarContract.Events.CONTENT_URI,contentValues);
 
         //set recurrence
         //set reminder
+
+
 
 
         finish();
