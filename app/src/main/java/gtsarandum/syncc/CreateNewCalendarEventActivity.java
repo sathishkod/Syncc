@@ -223,8 +223,22 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
 
         fromDatePicker.setText(date);
 
-        time=fromDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
-                +fromDateTimeValue.get(Calendar.MINUTE);
+        if (fromDateTimeValue.get(Calendar.HOUR_OF_DAY)>10 && fromDateTimeValue.get(Calendar.MINUTE)>10){
+            time=fromDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                    +fromDateTimeValue.get(Calendar.MINUTE);
+        } else if (fromDateTimeValue.get(Calendar.HOUR_OF_DAY)<10 && fromDateTimeValue.get(Calendar.MINUTE)>10){
+            time="0"+fromDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                    +fromDateTimeValue.get(Calendar.MINUTE);
+        } else if (fromDateTimeValue.get(Calendar.HOUR_OF_DAY)>10 && fromDateTimeValue.get(Calendar.MINUTE)<10){
+            time=fromDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                    +"0"+fromDateTimeValue.get(Calendar.MINUTE);
+        } else if (fromDateTimeValue.get(Calendar.HOUR_OF_DAY)<10 && fromDateTimeValue.get(Calendar.MINUTE)<10){
+            time="0"+fromDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                    +"0"+fromDateTimeValue.get(Calendar.MINUTE);
+        } else {
+            time=fromDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                    +fromDateTimeValue.get(Calendar.MINUTE);
+        }
 
         fromTimePicker.setText(time);
 
@@ -235,8 +249,22 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
 
         toDatePicker.setText(date);
 
-        time=toDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
-                +toDateTimeValue.get(Calendar.MINUTE);
+        if (toDateTimeValue.get(Calendar.HOUR_OF_DAY)>10 && toDateTimeValue.get(Calendar.MINUTE)>10){
+            time=toDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                    +toDateTimeValue.get(Calendar.MINUTE);
+        } else if (toDateTimeValue.get(Calendar.HOUR_OF_DAY)<10 && toDateTimeValue.get(Calendar.MINUTE)>10){
+            time="0"+toDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                    +toDateTimeValue.get(Calendar.MINUTE);
+        } else if (toDateTimeValue.get(Calendar.HOUR_OF_DAY)>10 && toDateTimeValue.get(Calendar.MINUTE)<10){
+            time=toDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                    +"0"+toDateTimeValue.get(Calendar.MINUTE);
+        } else if (toDateTimeValue.get(Calendar.HOUR_OF_DAY)<10 && toDateTimeValue.get(Calendar.MINUTE)<10){
+            time="0"+toDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                    +"0"+toDateTimeValue.get(Calendar.MINUTE);
+        } else {
+            time=toDateTimeValue.get(Calendar.HOUR_OF_DAY)+":"
+                    +toDateTimeValue.get(Calendar.MINUTE);
+        }
 
         toTimePicker.setText(time);
     }
