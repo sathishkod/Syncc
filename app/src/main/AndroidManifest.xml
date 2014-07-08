@@ -24,10 +24,6 @@
             </intent-filter>
         </activity>
 
-        <provider
-            android:name="com.tyczj.extendedcalendarview.CalendarProvider"
-            android:authorities="com.tyczj.extendedcalendarview.calendarprovider" />
-
         <activity
             android:name=".LiveLoginActivity"
             android:label="@string/title_activity_live_login"

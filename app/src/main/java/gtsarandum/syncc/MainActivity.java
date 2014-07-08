@@ -10,11 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
-
-import com.tyczj.extendedcalendarview.Day;
-import com.tyczj.extendedcalendarview.ExtendedCalendarView;
 
 
 public class MainActivity extends Activity
@@ -164,24 +160,6 @@ public class MainActivity extends Activity
     //makes a toast that says the given charSequence
     public void test(CharSequence charSequence){
         Toast.makeText(getApplicationContext(),charSequence,Toast.LENGTH_SHORT).show();
-    }
-
-    //calender callbacks
-
-    public class OnCalendarDayClickListener implements ExtendedCalendarView.OnDayClickListener
-
-    {
-        @Override
-        public void onDayClicked (AdapterView < ? > adapter, View view,int position, long id, Day day){
-        test("adfadsfadf");
-        //calenderClickedToMainListener.onDayClicked(adapter,view,position,id,day);
-    }
-
-        @Override
-        public void onDayLongClicked (AdapterView < ? > adapter, View view,int position,long id, Day day){
-        //calenderClickedToMainListener.onDayLongClicked(adapter,view,position,id,day);
-    }
-
     }
 
 }

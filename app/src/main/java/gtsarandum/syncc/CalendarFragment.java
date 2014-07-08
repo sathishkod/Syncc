@@ -2,27 +2,27 @@ package gtsarandum.syncc;
 
 import android.app.ActionBar;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.tyczj.extendedcalendarview.Day;
-import com.tyczj.extendedcalendarview.ExtendedCalendarView;
+import com.vdesmet.lib.calendar.MultiCalendarView;
+import com.vdesmet.lib.calendar.OnDayClickListener;
 
 import java.util.Calendar;
 
 
 public class CalendarFragment extends Fragment
-{
+    implements
+        OnDayClickListener
 
-    private ExtendedCalendarView extendedCalendarView;
+{
+    private MultiCalendarView multiCalendarView;
     private FrameLayout frameLayout;
 
 
@@ -47,15 +47,15 @@ public class CalendarFragment extends Fragment
         setHasOptionsMenu(true);
 
         if (frameLayout!=null) {
-            extendedCalendarView = (ExtendedCalendarView)frameLayout.findViewById(R.id.calendar);
+            multiCalendarView=(MultiCalendarView) frameLayout.findViewById(R.id.calendar);
         }else {
             test("frameLayout=null");
 
         }
 
-        if(extendedCalendarView!=null) {
-            extendedCalendarView.setGesture(1);
-            extendedCalendarView.setOnDayClickListener(new ExtendedCalendarView.OnDayClickListener() {
+        if(multiCalendarView!=null) {
+
+            /*extendedCalendarView.setOnDayClickListener(new ExtendedCalendarView.OnDayClickListener() {
                 @Override
                 public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
                     Intent intent=new Intent(getActivity().getApplicationContext(),DayEventsDisplayActivity.class);
@@ -69,9 +69,19 @@ public class CalendarFragment extends Fragment
                 public void onDayLongClicked(AdapterView<?> adapter, View view, int position, long id, Day day) {
 
                 }
-            });
+            });*/
+
+            multiCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
+            multiCalendarView.setIndicatorVisible(true);
+            Calendar fday=Calendar.getInstance();
+            Calendar lday=Calendar.getInstance();
+            fday.set(Calendar.DAY_OF_MONTH,1);
+            lday.set(Calendar.MONTH,12*3);
+            multiCalendarView.setFirstValidDay(fday);
+            multiCalendarView.setLastValidDay(lday);
+            multiCalendarView.setOnDayClickListener(this);
         } else {
-            test("extendedCalendarView=null");
+            test("multiCalendarView=null");
         }
     }
 
@@ -94,5 +104,8 @@ public class CalendarFragment extends Fragment
     }
 
 
-
+    @Override
+    public void onDayClick(long dayInMillis) {
+        Toast.makeText(getActivity().getApplicationContext(), String.valueOf(dayInMillis), Toast.LENGTH_SHORT).show();
+    }
 }

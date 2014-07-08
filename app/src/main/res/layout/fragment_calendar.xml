@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     tools:context="gtsarandum.syncc.CalendarFragment">
 
-    <com.tyczj.extendedcalendarview.ExtendedCalendarView
+    <com.vdesmet.lib.calendar.MultiCalendarView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/calendar"
+        android:paddingLeft="10dp"
         />
 
 </FrameLayout>

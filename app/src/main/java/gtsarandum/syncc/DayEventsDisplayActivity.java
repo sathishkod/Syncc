@@ -3,13 +3,11 @@ package gtsarandum.syncc;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
-import com.tyczj.extendedcalendarview.Day;
-import com.tyczj.extendedcalendarview.Event;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,7 +24,7 @@ public class DayEventsDisplayActivity extends Activity {
     private CardListView cardListView;
     private CardArrayAdapter cardArrayAdapter;
     private ArrayList<Card> cards;
-    private ArrayList<Event> events; //note com.tyczj.extendedcalendarview.Event
+    private ArrayList<CalendarContract.Events> events;
     private int eventCount=0;
 
     @Override
@@ -42,12 +40,12 @@ public class DayEventsDisplayActivity extends Activity {
         dayInMillis=intent.getLongExtra(DAY,0);
         calendar.setTimeInMillis(dayInMillis);
 
-        Day day=new Day(getApplicationContext(),calendar.get(Calendar.DAY_OF_MONTH),
+        /*Day day=new Day(getApplicationContext(),calendar.get(Calendar.DAY_OF_MONTH),
                 calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH));
 
         eventCount=day.getNumOfEvenets();
         test(eventCount+"");
-        events=day.getEvents();
+        events=day.getEvents();*/
 
         cardListView=(CardListView)findViewById(R.id.event_list);
 
