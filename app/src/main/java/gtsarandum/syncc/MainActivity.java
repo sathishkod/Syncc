@@ -136,6 +136,7 @@ public class MainActivity extends Activity
     private void newCalendarEvent(){
 
         Intent intent=new Intent(getApplicationContext(),CreateNewCalendarEventActivity.class);
+        intent.putExtra(CreateNewCalendarEventActivity.HAS_DATE,false);
         startActivity(intent);
     }
 

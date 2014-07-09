@@ -3,6 +3,7 @@ package gtsarandum.syncc;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -30,6 +31,9 @@ import java.util.TimeZone;
 
 public class CreateNewCalendarEventActivity extends FragmentActivity {
 
+    public static final String DATE="date";
+    public static final String HAS_DATE="boolean";
+
     //elements inside the view
     private ScrollView scrollView;
     private EditText eventTitleEditText;                //event_title_edit_text
@@ -52,11 +56,37 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
     private int reminderPosition;
     private EventRecurrence eventRecurrence;
 
+    public void initCalendarTrue (long calendarMillis){
+        this.fromDateTimeValue=Calendar.getInstance();
+        this.toDateTimeValue=Calendar.getInstance();
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTimeInMillis(calendarMillis);
+        this.fromDateTimeValue.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.HOUR_OF_DAY));
+        this.toDateTimeValue.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.HOUR_OF_DAY));
+        this.toDateTimeValue.set(Calendar.HOUR_OF_DAY,fromDateTimeValue.get(Calendar.HOUR_OF_DAY)+1);
+    }
+
+    public void initCalendarFalse(){
+        this.fromDateTimeValue=Calendar.getInstance();
+        this.toDateTimeValue=Calendar.getInstance();
+        this.toDateTimeValue.set(Calendar.HOUR_OF_DAY,fromDateTimeValue.get(Calendar.HOUR_OF_DAY)+1);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         scrollView=(ScrollView)getLayoutInflater().inflate(R.layout.activity_create_new_calendar_event,null,false);
         setContentView(scrollView);
+
+        Intent intent=getIntent();
+        if (intent.getBooleanExtra(HAS_DATE,false)){
+            initCalendarTrue(intent.getLongExtra(DATE,0));
+        } else {
+            initCalendarFalse();
+        }
+
         init();
     }
     private void init(){
@@ -76,10 +106,7 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
         reminderTime=(TextView) scrollView.findViewById(R.id.reminder_time);
 
         //init values
-        fromDateTimeValue=Calendar.getInstance();
-        toDateTimeValue=Calendar.getInstance();
         reminderValue=Calendar.getInstance();
-        toDateTimeValue.set(Calendar.HOUR, fromDateTimeValue.get(Calendar.HOUR)+1); //Termin geht default eine stunde lang
         allDayCheckValue=false;
         reminderPosition=0;
         eventRecurrence=new EventRecurrence();

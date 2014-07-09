@@ -2,6 +2,7 @@ package gtsarandum.syncc;
 
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -91,7 +92,11 @@ public class CalendarFragment extends Fragment
     //calendar
     @Override
     public void onDayClick(long dayInMillis) {
-
+        //start createnewcalendareventactivity with date
+        Intent intent=new Intent(getActivity().getApplicationContext(),CreateNewCalendarEventActivity.class);
+        intent.putExtra(CreateNewCalendarEventActivity.HAS_DATE,true);
+        intent.putExtra(CreateNewCalendarEventActivity.DATE,dayInMillis);
+        startActivity(intent);
     }
 
     //calendar
