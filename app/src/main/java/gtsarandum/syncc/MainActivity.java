@@ -133,13 +133,7 @@ public class MainActivity extends Activity
         return super.onOptionsItemSelected(item);
     }
 
-    private void newCalendarEvent(){//update to create activity and give all options to create event
-        /*Calendar begin =Calendar.getInstance();
-        Intent intent = new Intent(Intent.ACTION_INSERT);
-        intent.setData(CalendarContract.Events.CONTENT_URI);
-        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin.getTimeInMillis());
-
-        startActivity(intent);*/
+    private void newCalendarEvent(){
 
         Intent intent=new Intent(getApplicationContext(),CreateNewCalendarEventActivity.class);
         startActivity(intent);

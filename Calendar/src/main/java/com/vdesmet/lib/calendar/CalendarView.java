@@ -176,19 +176,19 @@ public class CalendarView extends AbstractCalendarView implements View.OnClickLi
                     adapter.updateTextView(dayTextView, timeInMillis);
 
                     // create a new view for each category
-                    final int[] colors = adapter.getCategoryColors(timeInMillis);
-                    if(colors != null) {
-                        for(final int color : colors) {
+                    final int colors = adapter.getCategoryColors(timeInMillis);
+                    if(colors != 0) {
+
                             // inflate a new category
                             final View category = inflater.inflate(R.layout.lib_calendar_category, categories, false);
 
                             // set the background color to the color provided by the adapter
-                            category.setBackgroundColor(color);
+                            category.setBackgroundColor(colors);
 
                             // add the view to the ViewGroup. Note that we can't do this while inflating,
                             // because that will cause the view to match the size of his parent
                             categories.addView(category);
-                        }
+
                     }
                 }
             }

@@ -12,7 +12,7 @@ public interface DayAdapter {
      * @param dayInMillis The date to retrieve the colors for
      * @return An int array containing the colors to be shown, or null
      */
-    public abstract int[] getCategoryColors(long dayInMillis);
+    public abstract int getCategoryColors(long dayInMillis);
 
     /**
      * Asks the adapter if the day should be enabled.

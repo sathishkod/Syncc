@@ -1,5 +1,6 @@
 package gtsarandum.syncc;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.widget.TextView;
 
@@ -9,18 +10,23 @@ import java.util.Calendar;
 import java.util.Random;
 
 public class CustomDayAdapter implements DayAdapter {
-    private static final int[][] CATEGORY_COLORS = {
-            null, null, null,
-            { Color.BLUE },
-            { Color.RED },
-            { Color.GREEN, Color.RED },
-            { Color.CYAN, Color.GREEN, Color.RED, Color.BLUE, Color.BLACK }
+
+    private Context context;
+
+    private static final int[] CATEGORY_COLORS = {
+            0,
+            Color.BLUE,
+            Color.RED,
+            Color.GREEN, Color.RED,
+            Color.CYAN, Color.GREEN, Color.RED, Color.BLUE, Color.BLACK
     };
 
     private final Random mRandom;
     private final long mToday;
 
-    public CustomDayAdapter() {
+    public CustomDayAdapter(Context context) {
+        this.context=context;
+
         mRandom = new Random();
 
         // Get the time in millis of today
@@ -33,10 +39,13 @@ public class CustomDayAdapter implements DayAdapter {
     }
 
     @Override
-    public int[] getCategoryColors(final long dayInMillis) {
-        // Fill the category colors with random int arrays.
-        final int index = mRandom.nextInt(CATEGORY_COLORS.length);
-        return CATEGORY_COLORS[index];
+    public int getCategoryColors(final long dayInMillis) {
+
+        //check if day has events
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTimeInMillis(dayInMillis);
+
+        return CATEGORY_COLORS[5];
     }
 
     @Override
@@ -45,14 +54,14 @@ public class CustomDayAdapter implements DayAdapter {
         calendar.setTimeInMillis(dayInMillis);
 
         // Disable all saturdays
-        return calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY;
+        return true; //calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY;
     }
 
     @Override
     public void updateTextView(final TextView dateTextView, final long dayInMillis) {
         if(mToday == dayInMillis) {
             // Do something with the selected date
-            dateTextView.setTextColor(Color.RED);
+            dateTextView.setTextColor(context.getResources().getColor(R.color.deep_orange_a700));
         }
         // else, we don't need to update the TextView
     }
@@ -62,11 +71,11 @@ public class CustomDayAdapter implements DayAdapter {
         switch(dayOfWeek) {
             case Calendar.SATURDAY:
             case Calendar.SUNDAY:
-                header.setTextColor(Color.RED);
+                header.setTextColor(context.getResources().getColor(R.color.deep_orange_a200));
                 break;
 
             default:
-                header.setTextColor(Color.BLUE);
+                header.setTextColor(context.getResources().getColor(R.color.indigo_500));
                 break;
         }
     }

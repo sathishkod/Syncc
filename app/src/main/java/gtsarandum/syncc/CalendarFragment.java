@@ -63,11 +63,12 @@ public class CalendarFragment extends Fragment
             Calendar fday=Calendar.getInstance();
             Calendar lday=Calendar.getInstance();
             fday.set(Calendar.DAY_OF_MONTH,1);
-            lday.set(Calendar.MONTH, 12 * 3);
+            lday.set(Calendar.YEAR,fday.get(Calendar.YEAR)+3);
             multiCalendarView.setFirstValidDay(fday);
             multiCalendarView.setLastValidDay(lday);
             multiCalendarView.setOnDayClickListener(this);
-            multiCalendarView.setDayAdapter(new CustomDayAdapter());
+            multiCalendarView.setDayAdapter(new CustomDayAdapter(getActivity().getApplicationContext()));
+            multiCalendarView.setIndicatorVisible(true);
         } else {
             test("multiCalendarView=null");
         }
@@ -95,6 +96,7 @@ public class CalendarFragment extends Fragment
     @Override
     public void onDayClick(long dayInMillis) {
         Toast.makeText(getActivity().getApplicationContext(), String.valueOf(dayInMillis), Toast.LENGTH_SHORT).show();
+        //DayEventsDisplayActivity
     }
 
     //calendar
