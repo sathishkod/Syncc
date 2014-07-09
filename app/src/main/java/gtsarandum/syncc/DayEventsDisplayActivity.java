@@ -40,13 +40,6 @@ public class DayEventsDisplayActivity extends Activity {
         dayInMillis=intent.getLongExtra(DAY,0);
         calendar.setTimeInMillis(dayInMillis);
 
-        /*Day day=new Day(getApplicationContext(),calendar.get(Calendar.DAY_OF_MONTH),
-                calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH));
-
-        eventCount=day.getNumOfEvenets();
-        test(eventCount+"");
-        events=day.getEvents();*/
-
         cardListView=(CardListView)findViewById(R.id.event_list);
 
         cards=new ArrayList<Card>();

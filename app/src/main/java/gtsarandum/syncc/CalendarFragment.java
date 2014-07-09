@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.vdesmet.lib.calendar.MultiCalendarAdapter;
 import com.vdesmet.lib.calendar.MultiCalendarView;
 import com.vdesmet.lib.calendar.OnCalendarLoadedListener;
 import com.vdesmet.lib.calendar.OnDayClickListener;
@@ -26,7 +25,6 @@ public class CalendarFragment extends Fragment
 {
     private MultiCalendarView multiCalendarView;
     private FrameLayout frameLayout;
-    private MultiCalendarAdapter multiCalendarAdapter;
 
 
     @Override
@@ -50,8 +48,6 @@ public class CalendarFragment extends Fragment
 
         if (frameLayout!=null) {
             multiCalendarView=(MultiCalendarView) frameLayout.findViewById(R.id.calendar);
-            multiCalendarAdapter=new MultiCalendarAdapter(getActivity().getApplicationContext(),
-                    multiCalendarView);
         }else {
             test("frameLayout=null");
 
@@ -95,8 +91,7 @@ public class CalendarFragment extends Fragment
     //calendar
     @Override
     public void onDayClick(long dayInMillis) {
-        Toast.makeText(getActivity().getApplicationContext(), String.valueOf(dayInMillis), Toast.LENGTH_SHORT).show();
-        //DayEventsDisplayActivity
+
     }
 
     //calendar

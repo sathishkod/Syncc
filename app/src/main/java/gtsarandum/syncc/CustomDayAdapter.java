@@ -1,9 +1,7 @@
 package gtsarandum.syncc;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.graphics.Color;
-import android.provider.CalendarContract;
 import android.widget.TextView;
 
 import com.vdesmet.lib.calendar.DayAdapter;
