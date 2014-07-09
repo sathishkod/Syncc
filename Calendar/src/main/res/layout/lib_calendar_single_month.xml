@@ -6,8 +6,9 @@
 
     <com.vdesmet.lib.calendar.CalendarView
             android:id="@+id/lib_calendar_single_month"
-            android:layout_marginLeft="1dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+        />
 
 </FrameLayout>

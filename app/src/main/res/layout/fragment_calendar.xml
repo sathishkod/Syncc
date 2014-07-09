@@ -5,10 +5,10 @@
     tools:context="gtsarandum.syncc.CalendarFragment">
 
     <com.vdesmet.lib.calendar.MultiCalendarView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:id="@+id/calendar"
-        android:paddingLeft="10dp"
+        android:layout_gravity="center_horizontal"
         />
 
 </FrameLayout>
