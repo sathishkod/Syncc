@@ -111,6 +111,7 @@ public class MainActivity extends Activity
             getMenuInflater().inflate(R.menu.main, menu);
             restoreActionBar();
             return true;
+
         }
         return super.onCreateOptionsMenu(menu);
     }
