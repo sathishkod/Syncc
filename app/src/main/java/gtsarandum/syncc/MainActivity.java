@@ -71,8 +71,6 @@ public class MainActivity extends Activity
 
         if(fragment!=null){
             replaceContainer(fragment);
-        } else {
-            test("fragment=null");
         }
 
         onSectionAttached(position);

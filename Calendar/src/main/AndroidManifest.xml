@@ -5,5 +5,4 @@
           android:versionName="1.0">
 
 
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="19"/>
 </manifest>

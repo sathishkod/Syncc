@@ -13,11 +13,7 @@ public class CustomDayAdapter implements DayAdapter {
     private Context context;
 
     private static final int[] CATEGORY_COLORS = {
-            0,
-            Color.BLUE,
-            Color.RED,
-            Color.GREEN, Color.RED,
-            Color.CYAN, Color.GREEN, Color.RED, Color.BLUE, Color.BLACK
+            0, Color.BLUE
     };
 
     private final long mToday;
