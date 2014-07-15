@@ -5,7 +5,7 @@ package gtsarandum.syncc;
  */
 
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +22,7 @@ class ContactAdapter extends BaseAdapter {
     private static final int TYPE_SEPARATOR = 1;
 
     private ArrayList<String> mData = new ArrayList<String>();
-    private ArrayList<Uri> photos=new ArrayList<Uri>();
+    private ArrayList<Bitmap> photos=new ArrayList<Bitmap>();
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
     private LayoutInflater mInflater;
@@ -37,9 +37,9 @@ class ContactAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void addItem(final String item, Uri uri){
+    public void addItem(final String item, Bitmap photo){
         mData.add(item);
-        photos.add(uri);
+        photos.add(photo);
         notifyDataSetChanged();
     }
 
@@ -80,12 +80,17 @@ class ContactAdapter extends BaseAdapter {
 
         if (convertView == null) {
             holder = new ViewHolder();
+
+
             switch (rowType) {
 
                 case TYPE_ITEM:
                     convertView = mInflater.inflate(R.layout.snippet_item1, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.text);
                     holder.imageView=(ImageView)convertView.findViewById(R.id.contact_image);
+                    if (photos.get(position)!=null){
+                        holder.imageView.setImageBitmap(photos.get(position));
+                    }
                     break;
                 case TYPE_SEPARATOR:
                     convertView = mInflater.inflate(R.layout.snippet_item2, null);
@@ -93,13 +98,12 @@ class ContactAdapter extends BaseAdapter {
                     break;
             }
             convertView.setTag(holder);
+
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.textView.setText(mData.get(position));
-        /*if (holder.imageView!=null && photos.get(position)!=null){
-            holder.imageView.setImageURI(photos.get(position));
-        }*/
+
         return convertView;
     }
 
