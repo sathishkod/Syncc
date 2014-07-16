@@ -2,12 +2,7 @@ package gtsarandum.syncc;
 
 import android.app.ActionBar;
 import android.app.ListFragment;
-import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.Menu;
@@ -15,8 +10,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import java.io.InputStream;
 
 
 public class ContactFragment extends ListFragment {
@@ -65,14 +58,14 @@ public class ContactFragment extends ListFragment {
                     contactAdapter.addSectionHeaderItem(String.valueOf(cmp));
                 }
 
-                contactAdapter.addItem(name);
+                contactAdapter.addItem(name/*,loadContactPhoto(getActivity().getApplicationContext().getContentResolver(),cursor.getInt(0))*/);
 
                 cursor.moveToNext();
             }
         }
 
     }
-
+/*
     private Bitmap loadContactPhoto(ContentResolver contentResolver,long id){
         Uri uri= ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, id);
         InputStream inputStream= ContactsContract.Contacts.openContactPhotoInputStream(contentResolver,uri);
@@ -81,7 +74,7 @@ public class ContactFragment extends ListFragment {
         }
 
         return BitmapFactory.decodeStream(inputStream);
-    }
+    }*/
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){

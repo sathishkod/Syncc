@@ -88,9 +88,10 @@ class ContactAdapter extends BaseAdapter {
                     convertView = mInflater.inflate(R.layout.snippet_item1, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.text);
                     holder.imageView=(ImageView)convertView.findViewById(R.id.contact_image);
-                    if (photos.get(position)!=null){
+                    /*
+                    if (photos.get(position)!=null && photos.size()<=position){
                         holder.imageView.setImageBitmap(photos.get(position));
-                    }
+                    }*/
                     break;
                 case TYPE_SEPARATOR:
                     convertView = mInflater.inflate(R.layout.snippet_item2, null);
