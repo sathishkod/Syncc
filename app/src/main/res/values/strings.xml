@@ -35,6 +35,20 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
 
+    <!-- Contacts -->
+    <string name="contact_name">Name</string>
+    <string name="contact_phonetic_name">Phonetic name</string>
+    <string name="contact_add_organization">Add organization</string>
+    <string name="contact_company">Company</string>
+    <string name="contact_title">Title</string>
+    <string name="contact_phone">Phone</string>
+    <string name="contact_email">Email</string>
+    <string name="contact_address">Address</string>
+    <string name="contact_notes">Notes</string>
+    <string name="contact_nickname">Nickname</string>
+    <string name="contact_website">Website</string>
+
+
     <string-array name="repetition_options">
         <item>none</item>
         <item>daily</item>
@@ -85,4 +99,7 @@
         <item>Nov</item>
         <item>Dec</item>
     </string-array>
+
+    <string name="title_activity_create_contact">CreateContactActivity</string>
+
 </resources>

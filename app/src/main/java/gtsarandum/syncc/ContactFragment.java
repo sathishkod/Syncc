@@ -47,18 +47,18 @@ public class ContactFragment extends ListFragment {
 
         char cmp=' ';
         String name;
-        String photo;
+        String id;
 
         if (cursor!=null && cursor.moveToFirst()){
             for (int i=0;i<cursor.getCount();i++){
                 name=cursor.getString(1);
-                photo=cursor.getString(6);
+                id=cursor.getString(0);
                 if (cmp<name.charAt(0)){
                     cmp=name.charAt(0);
-                    contactAdapter.addSectionHeaderItem(String.valueOf(cmp));
+                    contactAdapter.addSectionHeaderItem(String.valueOf(cmp), null);
                 }
 
-                contactAdapter.addItem(name/*,loadContactPhoto(getActivity().getApplicationContext().getContentResolver(),cursor.getInt(0))*/);
+                contactAdapter.addItem(name,id);
 
                 cursor.moveToNext();
             }
