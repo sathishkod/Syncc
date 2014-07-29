@@ -30,8 +30,8 @@ public class InformationDrawer extends Fragment {
     public void setUp(DrawerLayout drawerLayout){
         this.drawerLayout=drawerLayout;
 
-        //set shadow - reverse shadow TODO
-        this.drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.END);
+        //set shadow - reverse shadow
+        this.drawerLayout.setDrawerShadow(R.drawable.drawer_shadow_reverse, GravityCompat.END);
         //update content with placeholder
         PlaceholderFragment placeholderFragment=new PlaceholderFragment();
 
