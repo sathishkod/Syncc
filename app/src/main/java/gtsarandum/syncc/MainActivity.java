@@ -21,6 +21,7 @@ public class MainActivity extends Activity
 
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private InformationDrawer informationDrawer;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -38,6 +39,8 @@ public class MainActivity extends Activity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        informationDrawer=(InformationDrawer)
+                getFragmentManager().findFragmentById(R.id.information_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.

@@ -22,4 +22,13 @@
         android:name="gtsarandum.syncc.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer" />
 
+    <fragment
+        android:layout_width="@dimen/navigation_drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:id="@+id/information_drawer"
+        android:name="gtsarandum.syncc.InformationDrawer"
+        tools:layout="@layout/fragment_information_drawer"
+        />
+
 </android.support.v4.widget.DrawerLayout>
