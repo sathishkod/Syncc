@@ -36,11 +36,6 @@ public class InformationDrawer extends Fragment {
         PlaceholderFragment placeholderFragment=new PlaceholderFragment();
 
         updateContent(placeholderFragment);
-
-        //set width to be screen width-actionbar width
-        DisplayMetrics displayMetrics=new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        this.width=displayMetrics.widthPixels-getActivity().getActionBar().getHeight();
     }
 
     public void updateContent(Fragment fragment){
