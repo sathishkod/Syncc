@@ -1,31 +1,53 @@
 package gtsarandum.syncc;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 
 public class InformationDrawer extends Fragment {
 
     //attr
     private DrawerLayout drawerLayout;
+    private Fragment fragment;
+    private RelativeLayout relativeLayout;
+    private int width;
 
 
-    public static InformationDrawer newInstance() {
-        InformationDrawer fragment = new InformationDrawer();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+    public void setUp(DrawerLayout drawerLayout){
+        this.drawerLayout=drawerLayout;
+
+        //set shadow - reverse shadow TODO
+        this.drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.END);
+        //update content with placeholder
+        PlaceholderFragment placeholderFragment=new PlaceholderFragment();
+
+        updateContent(placeholderFragment);
+
+        //set width to be screen width-actionbar width
+        DisplayMetrics displayMetrics=new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        this.width=displayMetrics.widthPixels-getActivity().getActionBar().getHeight();
     }
+
+    public void updateContent(Fragment fragment){
+        this.fragment=fragment;
+        replaceInfoContainer(this.fragment);
+    }
+
     public InformationDrawer() {
         // Required empty public constructor
     }
@@ -39,18 +61,14 @@ public class InformationDrawer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_information_drawer, container, false);
+        relativeLayout=(RelativeLayout)inflater.inflate(R.layout.fragment_information_drawer,container,false);
+        return relativeLayout;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.info_menu, menu);
+        relativeLayout.setMinimumWidth(this.width);
     }
 
     @Override
@@ -62,6 +80,12 @@ public class InformationDrawer extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    private void replaceInfoContainer(Fragment fragment){
+        FragmentTransaction transaction=getFragmentManager().beginTransaction();
+        transaction.replace(R.id.info_container,fragment);
+        transaction.commit();
     }
 
 }

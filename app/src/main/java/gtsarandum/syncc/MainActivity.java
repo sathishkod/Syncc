@@ -47,6 +47,9 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        //set up info drawer
+        informationDrawer.setUp((DrawerLayout)findViewById(R.id.drawer_layout));
     }
 
     @Override
