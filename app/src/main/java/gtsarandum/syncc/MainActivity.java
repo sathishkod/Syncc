@@ -6,10 +6,12 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import de.cyclingsir.helper.calendar.DateEvent;
@@ -24,6 +26,7 @@ public class MainActivity extends Activity
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private InformationDrawer informationDrawer;
+    private DrawerLayout drawerLayout;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -43,6 +46,7 @@ public class MainActivity extends Activity
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         informationDrawer=(InformationDrawer)
                 getFragmentManager().findFragmentById(R.id.information_drawer);
+        drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         mTitle = getTitle();
 
         // Set up the drawer.
@@ -64,7 +68,9 @@ public class MainActivity extends Activity
                 calendarFragment.setListener(new CalendarFragment.customOnCalendarInteractionListener() {
                     @Override
                     public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth) {
-                        test(String.valueOf(dayOfMonth));
+                        //get events for the day and display them in fragment given to informationdrawer
+
+                        drawerLayout.openDrawer(GravityCompat.END);
                     }
 
                     @Override
@@ -86,7 +92,16 @@ public class MainActivity extends Activity
                 break;
             case 1://open contacts
                 ContactFragment contactFragment=new ContactFragment();
+                //setup
+                contactFragment.setListener(new ContactFragment.customContactClickListener() {
+                    @Override
+                    public void onContactClick(ListView l, View v, int position, long id) {
+                        //create fragment and update content in information drawer
 
+                        //open informationdrawer
+                        drawerLayout.openDrawer(GravityCompat.END);
+                    }
+                });
                 replaceContainer(contactFragment);
                 break;
             case 2://open notes

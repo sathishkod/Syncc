@@ -2,14 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="gtsarandum.syncc.PlaceholderFragment">
+    tools:context="gtsarandum.syncc.EventDisplayFragment">
 
-    <TextView
-        android:id="@+id/placeholder_textview"
+    <it.gmariotti.cardslib.library.view.CardListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@android:color/white"
-        android:textSize="25sp"
-        />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

@@ -14,7 +14,9 @@ import android.widget.Toast;
 
 public class ContactFragment extends ListFragment {
 
-    ContactAdapter contactAdapter;
+    //attr
+    private ContactAdapter contactAdapter;
+    private customContactClickListener listener;
 
 
     @Override
@@ -95,14 +97,23 @@ public class ContactFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-
+        if (listener!=null){
+            listener.onContactClick(l,v,position,id);
+        }
     }
 
     public ContactFragment() {}
     //makes a toast that says the given charSequence
     public void test(CharSequence charSequence){
         Toast.makeText(getActivity().getApplicationContext(), charSequence, Toast.LENGTH_SHORT).show();
+    }
+
+    public void setListener(customContactClickListener listener){
+        this.listener=listener;
+    }
+
+    public interface customContactClickListener {
+        void onContactClick(ListView l,View v,int position, long id);
     }
 
 }

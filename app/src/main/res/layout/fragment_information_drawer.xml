@@ -8,5 +8,6 @@
     android:layout_height="match_parent"
     tools:context="gtsarandum.syncc.InformationDrawer"
     android:id="@+id/info_container"
+    android:background="@color/indigo_500"
     />
     </RelativeLayout>

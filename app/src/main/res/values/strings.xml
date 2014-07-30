@@ -1,45 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Syncc</string>
-    <string name="title_section1">Calendar</string>
+	<!-- single strings -->
+	<!-- basic/app general -->
+	<string name="app_name">Syncc</string>
+	<string name="shared_preferences_file_name">SynccSharedPreferences</string>
+	<!-- navigationdrawer strings -->
+	<string name="title_section1">Calendar</string>
     <string name="title_section2">Contacts</string>
     <string name="title_section3">Notes</string>
     <string name="title_section4">Login</string>
     <string name="title_section5">Settings</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
+	
+	<string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="display_results_here">Results will display here</string>
-    <string name="shared_preferences_file_name">SynccSharedPreferences</string>
-    <string name="title_activity_live_login">Login</string>
-    <string name="create_new_event">Create new event</string>
-    <string name="title_activity_day_events_display">Events</string>
+	
+	<!-- actionbar -->
+	<string name="create_new_event">Create new event</string>
     <string name="action_settings">Settings</string>
     <string name="action_add_person">Create new contact</string>
     <string name="action_accept">Accept</string>
-    <string name="event_title">Title</string>
+	<string name="action_cancel">Cancel</string>
+	<string name="action_go_to_today">Go to today</string>
+	
+	
+	<!-- CreateNewEventActivity -->
+    <string name="title_activity_create_new_calendar_event">Create new event</string>
+	<string name="event_title">Title</string>
     <string name="event_location">Location</string>
     <string name="event_all_day">All day</string>
     <string name="event_description">Description</string>
     <string name="event_guests">Guests</string>
-    <string name="from">From</string>
-    <string name="to">To</string>
     <string name="repetition">Recurrence</string>
     <string name="reminders">Reminders</string>
     <string name="set_recurrence">Set recurrence for event</string>
     <string name="no_recurrence">No recurrence set</string>
-    <string name="title_activity_create_new_event">New event</string>
-    <string name="title_activity_create_new_calendar_event">Create new event</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="date">Date</string>
+	<string name="from">From</string>
+    <string name="to">To</string>
+	<string name="date">Date</string>
     <string name="time">Time</string>
-    <string name="close">Close</string>
+	
+	<!-- LiveLoginActivity -->
+	<string name="title_activity_live_login">Login</string>
+	<string name="display_results_here">Results will display here</string>
+	
+	<!-- infromationDrawer -->
     <string name="info_placeholder_text">Select a date, contact or note to view information</string>
-    <string name="action_go_to_today">Go to today</string>
-
-    <!-- Contacts -->
-    <string name="contact_name">Name</string>
+	
+	<!-- CreateContactActivity -->
+	<string name="title_activity_create_contact">CreateContactActivity</string>
+	<string name="contact_name">Name</string>
     <string name="contact_phonetic_name">Phonetic name</string>
     <string name="contact_add_organization">Add organization</string>
     <string name="contact_company">Company</string>
@@ -50,7 +59,29 @@
     <string name="contact_notes">Notes</string>
     <string name="contact_nickname">Nickname</string>
     <string name="contact_website">Website</string>
-
+	
+	<!-- other -->
+	<string name="hello_world">Hello world!</string>
+	<string name="hello_blank_fragment">Hello blank fragment</string>
+	
+	<!-- string-arrays -->
+	<!-- for navigationDrawer -->
+	<string-array name="nav_drawer_items">
+        <item>Calendar</item>
+        <item>Contacts</item>
+        <item>Notes</item>
+        <item>Login</item>
+        <item>Settings</item>
+    </string-array>
+    <string-array name="nav_drawer_tags">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+    </string-array>
+	
+	<!-- reminder -->
     <string-array name="repetition_options">
         <item>none</item>
         <item>daily</item>
@@ -73,20 +104,8 @@
         <item>Next week</item>
         <item>Set date…</item>
     </string-array>
-    <string-array name="nav_drawer_items">
-        <item>Calendar</item>
-        <item>Contacts</item>
-        <item>Notes</item>
-        <item>Login</item>
-        <item>Settings</item>
-    </string-array>
-    <string-array name="nav_drawer_tags">
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-    </string-array>
+
+    <!-- calender -->
     <string-array name="month_short">
         <item>Jan</item>
         <item>Feb</item>
@@ -101,8 +120,5 @@
         <item>Nov</item>
         <item>Dec</item>
     </string-array>
-
-    <string name="title_activity_create_contact">CreateContactActivity</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+	
 </resources>

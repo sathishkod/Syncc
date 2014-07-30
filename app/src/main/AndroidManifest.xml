@@ -32,14 +32,6 @@
                 android:value="gtsarandum.syncc.MainActivity" />
         </activity>
         <activity
-            android:name=".DayEventsDisplayActivity"
-            android:label="@string/title_activity_day_events_display"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="gtsarandum.syncc.MainActivity" />
-        </activity>
-        <activity
             android:name=".CreateNewCalendarEventActivity"
             android:label="@string/title_activity_create_new_calendar_event" > <!-- android:parentActivityName=".MainActivity" -->
             <meta-data
