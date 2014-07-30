@@ -1,1 +1,1 @@
-include ':app', ':src', ':Calendar'
+include ':app', ':src', ':Calendar', ':HighlightCalendarView'

@@ -1,0 +1,30 @@
+apply plugin: 'android-library'
+apply plugin: 'maven'
+
+// http://stackoverflow.com/questions/6122252/gradle-alternate-to-mvn-install
+// http://www.gradle.org/docs/current/userguide/maven_plugin.html
+// http://stackoverflow.com/questions/18559932/gradle-maven-plugin-install-task-does-not-work-with-android-library-project
+
+group = 'de.cyclingsir'
+version = '1.0.0-SNAPSHOT'
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+          repository(url: "file://${System.env.HOME}/.m2/repository/")
+        }
+    }
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "20"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0.0-SNAPSHOT"
+    }
+}
