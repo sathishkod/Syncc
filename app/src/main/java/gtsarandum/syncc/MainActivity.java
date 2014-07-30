@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity
         implements
-        NavigationDrawerFragment.NavigationDrawerCallbacks
+        NavigationDrawerFragment.NavigationDrawerCallbacks,
+        CalendarFragment.customOnCalendarInteractionListener
 
 {
 

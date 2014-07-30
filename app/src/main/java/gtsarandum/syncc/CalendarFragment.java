@@ -2,7 +2,6 @@ package gtsarandum.syncc;
 
 import android.app.ActionBar;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,19 +11,14 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.vdesmet.lib.calendar.MultiCalendarView;
-import com.vdesmet.lib.calendar.OnCalendarLoadedListener;
-import com.vdesmet.lib.calendar.OnDayClickListener;
-
-import java.util.Calendar;
+import de.cyclingsir.helper.calendar.DateEvent;
+import de.cyclingsir.helper.calendar.HighlightCalendarView;
 
 
 public class CalendarFragment extends Fragment
-    implements
-        OnDayClickListener,
-        OnCalendarLoadedListener
 {
-    private MultiCalendarView multiCalendarView;
+    //attr
+    private HighlightCalendarView highlightCalendarView;
     private FrameLayout frameLayout;
 
 
@@ -48,27 +42,37 @@ public class CalendarFragment extends Fragment
         setHasOptionsMenu(true);
 
         if (frameLayout!=null) {
-            multiCalendarView=(MultiCalendarView) frameLayout.findViewById(R.id.calendar);
+            highlightCalendarView=(HighlightCalendarView) frameLayout.findViewById(R.id.calendar);
         }else {
             test("frameLayout=null");
-
         }
 
-        if(multiCalendarView!=null) {
-            multiCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
-            multiCalendarView.setIndicatorVisible(true);
-            Calendar fday=Calendar.getInstance();
-            Calendar lday=Calendar.getInstance();
-            fday.set(Calendar.DAY_OF_MONTH,1);
-            lday.set(Calendar.YEAR,fday.get(Calendar.YEAR)+3);
-            multiCalendarView.setFirstValidDay(fday);
-            multiCalendarView.setLastValidDay(lday);
-            multiCalendarView.setOnDayClickListener(this);
-            multiCalendarView.setDayAdapter(new CustomDayAdapter(getActivity().getApplicationContext()));
-            multiCalendarView.setIndicatorVisible(true);
-        } else {
-            test("multiCalendarView=null");
+        if(highlightCalendarView!=null){
+            //listener and events
+
+            highlightCalendarView.setOnDateSelectedListener(new HighlightCalendarView.OnDateSelectedListener() {
+                @Override
+                public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth) {
+
+                }
+
+                @Override
+                public void onViewChanged(long startDate, long endDate) {
+                    //don't do anything i guess
+                }
+
+                @Override
+                public void onEventSelected(DateEvent event) {
+                    //TODO look into this method and figure out what it does
+                }
+
+                @Override
+                public void onAddEvent(long date) {
+                    //again nothing much to do here
+                }
+            });
         }
+
     }
 
     @Override
@@ -89,19 +93,11 @@ public class CalendarFragment extends Fragment
         Toast.makeText(getActivity().getApplicationContext(), charSequence, Toast.LENGTH_SHORT).show();
     }
 
-    //calendar
-    @Override
-    public void onDayClick(long dayInMillis) {
-        //start createnewcalendareventactivity with date
-        Intent intent=new Intent(getActivity().getApplicationContext(),CreateNewCalendarEventActivity.class);
-        intent.putExtra(CreateNewCalendarEventActivity.HAS_DATE,true);
-        intent.putExtra(CreateNewCalendarEventActivity.DATE,dayInMillis);
-        startActivity(intent);
+    public interface customOnCalendarInteractionListener {
+        void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth);
+        void onViewChanged(long startDate, long endDate);
+        void onEventSelected(DateEvent event);
+        void onAddEvent(long date);
     }
 
-    //calendar
-    @Override
-    public void onCalendarLoaded(MultiCalendarView view) {
-
-    }
 }

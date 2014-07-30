@@ -4,11 +4,10 @@
     android:layout_height="match_parent"
     tools:context="gtsarandum.syncc.CalendarFragment">
 
-    <com.vdesmet.lib.calendar.MultiCalendarView
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+    <de.cyclingsir.helper.calendar.HighlightCalendarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/calendar"
-        android:layout_gravity="center_horizontal"
         />
 
 </FrameLayout>
