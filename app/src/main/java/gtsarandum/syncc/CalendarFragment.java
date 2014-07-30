@@ -55,7 +55,7 @@ public class CalendarFragment extends Fragment
 
         if(highlightCalendarView!=null){
             //listener and events
-
+            //TODO get events and display them in calender with .addEvents(List<? extends DateEvent>)
             //sets listener that calls internal listener set from mainactivity
             highlightCalendarView.setOnDateSelectedListener(new HighlightCalendarView.OnDateSelectedListener() {
                 @Override
