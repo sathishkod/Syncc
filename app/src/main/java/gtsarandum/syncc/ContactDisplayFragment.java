@@ -14,6 +14,10 @@ public class ContactDisplayFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public void setUp(){
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

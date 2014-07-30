@@ -97,7 +97,11 @@ public class MainActivity extends Activity
                     @Override
                     public void onContactClick(ListView l, View v, int position, long id) {
                         //create fragment and update content in information drawer
-
+                        ContactDisplayFragment contactDisplayFragment=new ContactDisplayFragment();
+                        //setup
+                        contactDisplayFragment.setUp();
+                        //update content
+                        informationDrawer.updateContent(contactDisplayFragment);
                         //open informationdrawer
                         drawerLayout.openDrawer(GravityCompat.END);
                     }
