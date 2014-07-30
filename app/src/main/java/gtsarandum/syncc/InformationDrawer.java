@@ -21,17 +21,12 @@ import android.widget.RelativeLayout;
 public class InformationDrawer extends Fragment {
 
     //attr
-    private DrawerLayout drawerLayout;
-    private Fragment fragment;
-    private RelativeLayout relativeLayout;
-    private int width;
 
 
     public void setUp(DrawerLayout drawerLayout){
-        this.drawerLayout=drawerLayout;
 
         //set shadow - reverse shadow
-        this.drawerLayout.setDrawerShadow(R.drawable.drawer_shadow_reverse, GravityCompat.END);
+        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow_reverse, GravityCompat.END);
         //update content with placeholder
         PlaceholderFragment placeholderFragment=new PlaceholderFragment();
 
@@ -39,8 +34,7 @@ public class InformationDrawer extends Fragment {
     }
 
     public void updateContent(Fragment fragment){
-        this.fragment=fragment;
-        replaceInfoContainer(this.fragment);
+        replaceInfoContainer(fragment);
     }
 
     public InformationDrawer() {
@@ -56,14 +50,12 @@ public class InformationDrawer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        relativeLayout=(RelativeLayout)inflater.inflate(R.layout.fragment_information_drawer,container,false);
-        return relativeLayout;
+        return inflater.inflate(R.layout.fragment_information_drawer,container,false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        relativeLayout.setMinimumWidth(this.width);
     }
 
     @Override
