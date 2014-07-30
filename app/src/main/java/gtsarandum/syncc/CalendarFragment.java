@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 import de.cyclingsir.helper.calendar.DateEvent;
 import de.cyclingsir.helper.calendar.HighlightCalendarView;
@@ -44,6 +47,8 @@ public class CalendarFragment extends Fragment
 
         if (frameLayout!=null) {
             highlightCalendarView=(HighlightCalendarView) frameLayout.findViewById(R.id.calendar);
+            highlightCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
+            highlightCalendarView.setShowWeekNumber(false);
         }else {
             test("frameLayout=null");
         }
@@ -92,6 +97,19 @@ public class CalendarFragment extends Fragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         inflater.inflate(R.menu.calendar_menu,menu);
         showGlobalContextActionBar();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_go_to_today://go to today
+                highlightCalendarView.setDate(Calendar.getInstance().getTimeInMillis(),true,true);
+                //TODO find working way to go to today when actionbar icon is clicked
+            default:break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void showGlobalContextActionBar(){

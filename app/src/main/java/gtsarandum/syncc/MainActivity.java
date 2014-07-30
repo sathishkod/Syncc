@@ -156,6 +156,8 @@ public class MainActivity extends Activity
             case R.id.action_new_event://new event
                 newCalendarEvent();
                 break;
+            case R.id.action_go_to_today://go to today
+
             default:break;
         }
 

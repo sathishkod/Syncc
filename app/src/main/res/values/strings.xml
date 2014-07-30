@@ -36,6 +36,7 @@
     <string name="time">Time</string>
     <string name="close">Close</string>
     <string name="info_placeholder_text">Select a date, contact or note to view information</string>
+    <string name="action_go_to_today">Go to today</string>
 
     <!-- Contacts -->
     <string name="contact_name">Name</string>
