@@ -20,6 +20,7 @@ public class CalendarFragment extends Fragment
     //attr
     private HighlightCalendarView highlightCalendarView;
     private FrameLayout frameLayout;
+    private customOnCalendarInteractionListener listener;
 
 
     @Override
@@ -50,25 +51,37 @@ public class CalendarFragment extends Fragment
         if(highlightCalendarView!=null){
             //listener and events
 
+            //sets listener that calls internal listener set from mainactivity
             highlightCalendarView.setOnDateSelectedListener(new HighlightCalendarView.OnDateSelectedListener() {
                 @Override
                 public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth) {
-
+                    if (listener!=null) {
+                        listener.onDaySelected(view, year, month, dayOfMonth);
+                    }
                 }
 
                 @Override
                 public void onViewChanged(long startDate, long endDate) {
                     //don't do anything i guess
+                    if (listener!=null){
+                        listener.onViewChanged(startDate,endDate);
+                    }
                 }
 
                 @Override
                 public void onEventSelected(DateEvent event) {
                     //TODO look into this method and figure out what it does
+                    if (listener!=null){
+                        listener.onEventSelected(event);
+                    }
                 }
 
                 @Override
                 public void onAddEvent(long date) {
                     //again nothing much to do here
+                    if (listener!=null){
+                        listener.onAddEvent(date);
+                    }
                 }
             });
         }
@@ -87,7 +100,12 @@ public class CalendarFragment extends Fragment
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
     }
 
-    public CalendarFragment() {}
+    public CalendarFragment() {
+    }
+
+    public void setListener(customOnCalendarInteractionListener listener){
+        this.listener=listener;
+    }
     //makes a toast that says the given charSequence
     public void test(CharSequence charSequence){
         Toast.makeText(getActivity().getApplicationContext(), charSequence, Toast.LENGTH_SHORT).show();

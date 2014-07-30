@@ -12,12 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import de.cyclingsir.helper.calendar.DateEvent;
+import de.cyclingsir.helper.calendar.HighlightCalendarView;
+
 
 public class MainActivity extends Activity
         implements
-        NavigationDrawerFragment.NavigationDrawerCallbacks,
-        CalendarFragment.customOnCalendarInteractionListener
-
+        NavigationDrawerFragment.NavigationDrawerCallbacks
 {
 
 
@@ -55,17 +56,43 @@ public class MainActivity extends Activity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        Fragment fragment=null;
-
         switch (position){
             case 0://open calendar
-                fragment=new CalendarFragment();
+
+                CalendarFragment calendarFragment=new CalendarFragment();
+                //setup
+                calendarFragment.setListener(new CalendarFragment.customOnCalendarInteractionListener() {
+                    @Override
+                    public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth) {
+                        test(String.valueOf(dayOfMonth));
+                    }
+
+                    @Override
+                    public void onViewChanged(long startDate, long endDate) {
+
+                    }
+
+                    @Override
+                    public void onEventSelected(DateEvent event) {
+
+                    }
+
+                    @Override
+                    public void onAddEvent(long date) {
+
+                    }
+                });
+                replaceContainer(calendarFragment);
                 break;
             case 1://open contacts
-                fragment=new ContactFragment();
+                ContactFragment contactFragment=new ContactFragment();
+
+                replaceContainer(contactFragment);
                 break;
             case 2://open notes
-                fragment=new NoteFragment();
+                NoteFragment noteFragment=new NoteFragment();
+
+                replaceContainer(noteFragment);
                 break;
             case 3://login
                 openLogin();
@@ -74,10 +101,6 @@ public class MainActivity extends Activity
                 openSettings();
                 break;
             default:break;
-        }
-
-        if(fragment!=null){
-            replaceContainer(fragment);
         }
 
         onSectionAttached(position);
