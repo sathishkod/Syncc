@@ -60,6 +60,13 @@
             android:background="@drawable/vertical_divider"
             />
 
+        <Button
+            android:id="@+id/message_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            />
+
         </LinearLayout>
 
 </RelativeLayout>

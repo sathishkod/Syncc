@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import de.cyclingsir.helper.calendar.DateEvent;
 import de.cyclingsir.helper.calendar.HighlightCalendarView;
@@ -21,6 +23,7 @@ import de.cyclingsir.helper.calendar.HighlightCalendarView;
 public class CalendarFragment extends Fragment
 {
     //attr
+    ArrayList<SynccEvent> synccEvents;
     private HighlightCalendarView highlightCalendarView;
     private FrameLayout frameLayout;
     private customOnCalendarInteractionListener listener;
@@ -42,6 +45,10 @@ public class CalendarFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle bundle){
         super.onActivityCreated(bundle);
+
+        synccEvents=new ArrayList<SynccEvent>();
+        //fill array with events
+        fillSynccEventsList();
 
         setHasOptionsMenu(true);
 
@@ -91,6 +98,10 @@ public class CalendarFragment extends Fragment
             });
         }
 
+    }
+
+    private void fillSynccEventsList(){
+        //get all events and put into list to give the highlightcalendarview
     }
 
     @Override
