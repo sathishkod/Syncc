@@ -2,7 +2,9 @@ package gtsarandum.syncc;
 
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -62,7 +64,7 @@ public class CalendarFragment extends Fragment
 
         if(highlightCalendarView!=null){
             //listener and events
-            //TODO get events and display them in calender with .addEvents(List<? extends DateEvent>)
+            highlightCalendarView.addEvents(synccEvents);
             //sets listener that calls internal listener set from mainactivity
             highlightCalendarView.setOnDateSelectedListener(new HighlightCalendarView.OnDateSelectedListener() {
                 @Override
@@ -101,7 +103,66 @@ public class CalendarFragment extends Fragment
     }
 
     private void fillSynccEventsList(){
+        int id=getCalendarID();
         //get all events and put into list to give the highlightcalendarview
+
+        //TODO gets phantom events? fix it so it only has events that actually take place
+        Cursor cursor=getActivity().getContentResolver().query(
+                CalendarContract.Events.CONTENT_URI,
+                new String[]{
+                        CalendarContract.Events._ID,
+                        CalendarContract.Events.TITLE,
+                        CalendarContract.Events.DTSTART,
+                        CalendarContract.Events.DTEND,
+                        CalendarContract.Events.DESCRIPTION,
+                        CalendarContract.Events.EVENT_LOCATION
+                },
+                CalendarContract.Events.CALENDAR_ID+"=1",
+                null,
+                null
+        );
+
+        if (cursor.moveToFirst()){
+            do {
+                synccEvents.add(new SynccEvent(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getLong(2),
+                        cursor.getLong(3)
+                ));
+
+                synccEvents.get(synccEvents.size()-1).setDescription(cursor.getString(4));
+                synccEvents.get(synccEvents.size()-1).setLocation(cursor.getString(5));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+    }
+
+    private int getCalendarID(){
+
+        Cursor cursor=getActivity().getContentResolver().query(
+                CalendarContract.Calendars.CONTENT_URI,
+                new String[]{
+                        CalendarContract.Calendars._ID,
+                        CalendarContract.Calendars.ACCOUNT_NAME,
+                        CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
+                        CalendarContract.Calendars.OWNER_ACCOUNT
+                },
+                null,
+                null,
+                null
+        );
+
+        //TODO shows events from the past - why? fix!
+
+        if (cursor.moveToFirst()){
+            cursor.moveToNext();
+            cursor.moveToNext();
+            test(cursor.getString(1));
+        }
+
+        return 0;
     }
 
     @Override

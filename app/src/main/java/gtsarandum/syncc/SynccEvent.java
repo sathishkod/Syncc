@@ -49,4 +49,9 @@ public class SynccEvent implements DateEvent {
     public long getDate() {
         return this.begin;
     }
+
+    @Override
+    public String toString(){
+        return title;
+    }
 }
