@@ -348,7 +348,7 @@ public class HighlightCalendarView extends FrameLayout {
          */
         public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth);
 
-        public void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth);
+        public void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth, List<DateEvent> list);
 
         /**
          * Called after the calendar was scrolled to a different
@@ -1573,7 +1573,8 @@ public class HighlightCalendarView extends FrameLayout {
                     mOnDateChangeListener.onEventDaySelected(HighlightCalendarView.this,
                             mTempDate.get(Calendar.YEAR),
                             mTempDate.get(Calendar.MONTH),
-                            mTempDate.get(Calendar.DAY_OF_MONTH));
+                            mTempDate.get(Calendar.DAY_OF_MONTH),
+                            list);
 
                 } else {
                 	mOnDateChangeListener.onAddEvent(mTempDate.getTimeInMillis());

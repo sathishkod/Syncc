@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import de.cyclingsir.helper.calendar.DateEvent;
 import de.cyclingsir.helper.calendar.HighlightCalendarView;
 
@@ -68,14 +70,13 @@ public class MainActivity extends Activity
                 calendarFragment.setListener(new CalendarFragment.customOnCalendarInteractionListener() {
                     @Override
                     public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth) {
-                        //get events for the day and display them in fragment given to informationdrawer
-
-                        drawerLayout.openDrawer(GravityCompat.END);
+                        //create AlertDialog - create new event? yes|no
                     }
 
                     @Override
-                    public void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth){
-                        test("this day has an event");
+                    public void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth, List<DateEvent> list){
+                        test(String.valueOf(list.size()));
+                        drawerLayout.openDrawer(GravityCompat.END);
                     }
 
                     @Override

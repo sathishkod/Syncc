@@ -75,9 +75,9 @@ public class CalendarFragment extends Fragment
                 }
 
                 @Override
-                public void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth) {
+                public void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth, List<DateEvent> list) {
                     if (listener!=null){
-                        listener.onEventDaySelected(view,year,month,dayOfMonth);
+                        listener.onEventDaySelected(view,year,month,dayOfMonth, list);
                     }
                 }
 
@@ -210,7 +210,7 @@ public class CalendarFragment extends Fragment
 
     public interface customOnCalendarInteractionListener {
         void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth);
-        void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth);
+        void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth, List<DateEvent> list);
         void onViewChanged(long startDate, long endDate);
         void onEventSelected(DateEvent event);
         void onAddEvent(long date);
