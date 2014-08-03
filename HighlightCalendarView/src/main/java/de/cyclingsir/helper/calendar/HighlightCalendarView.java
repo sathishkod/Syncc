@@ -348,6 +348,8 @@ public class HighlightCalendarView extends FrameLayout {
          */
         public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth);
 
+        public void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth);
+
         /**
          * Called after the calendar was scrolled to a different
          * view.
@@ -1415,6 +1417,8 @@ public class HighlightCalendarView extends FrameLayout {
      */
     private class WeeksAdapter extends BaseAdapter implements OnTouchListener {
 
+        private boolean dayHasEvents;
+
         private int mSelectedWeek;
 
         private final GestureDetector mGestureDetector;
@@ -1518,6 +1522,7 @@ public class HighlightCalendarView extends FrameLayout {
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
+
             if (mListView.isEnabled() && mGestureDetector.onTouchEvent(event)) {
                 final WeekView weekView = (WeekView) v;
                 // if we cannot find a day for the given location we are done
@@ -1534,7 +1539,13 @@ public class HighlightCalendarView extends FrameLayout {
                 final List<DateEvent> list = mEvents.get(dayHash);
                 if(list != null && !list.isEmpty()) {
 
+                    dayHasEvents=true;
+
+//code in comments builds AlertDialog that shows the events - but only if there are any events on that day
                     // http://stackoverflow.com/questions/5645235/android-opening-context-menu-after-button-click/5645686#5645686
+/*
+
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                     CharSequence[] items = new CharSequence[list.size()];
                     for (int i = 0; i < list.size() ; i++) {
@@ -1557,19 +1568,31 @@ public class HighlightCalendarView extends FrameLayout {
 
                     menu.show();
 
+*/
+
+                    mOnDateChangeListener.onEventDaySelected(HighlightCalendarView.this,
+                            mTempDate.get(Calendar.YEAR),
+                            mTempDate.get(Calendar.MONTH),
+                            mTempDate.get(Calendar.DAY_OF_MONTH));
+
                 } else {
                 	mOnDateChangeListener.onAddEvent(mTempDate.getTimeInMillis());
+                    dayHasEvents=false;
+
+                    mOnDateChangeListener.onDaySelected(HighlightCalendarView.this,
+                            mTempDate.get(Calendar.YEAR),
+                            mTempDate.get(Calendar.MONTH),
+                            mTempDate.get(Calendar.DAY_OF_MONTH));
                 }
 
-        		mOnDateChangeListener.onDaySelected(HighlightCalendarView.this,
-        				mTempDate.get(Calendar.YEAR),
-        				mTempDate.get(Calendar.MONTH),
-        				mTempDate.get(Calendar.DAY_OF_MONTH));
                 return true;
             }
             return false;
         }
 
+        public boolean isDayHasEvents(){
+            return dayHasEvents;
+        }
 
         /**
          * Maintains the same hour/min/sec but moves the day to the tapped day.

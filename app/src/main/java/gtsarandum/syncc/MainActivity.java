@@ -74,6 +74,11 @@ public class MainActivity extends Activity
                     }
 
                     @Override
+                    public void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth){
+                        test("this day has an event");
+                    }
+
+                    @Override
                     public void onViewChanged(long startDate, long endDate) {
 
                     }
