@@ -59,6 +59,11 @@
     <string name="contact_notes">Notes</string>
     <string name="contact_nickname">Nickname</string>
     <string name="contact_website">Website</string>
+
+    <!-- ContactFragment -->
+    <string name="create_event_message">Create new event?</string>
+    <string name="create_event_yes">Yes</string>
+    <string name="create_event_no">No</string>
 	
 	<!-- other -->
 	<string name="hello_world">Hello world!</string>

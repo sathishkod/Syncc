@@ -1561,7 +1561,7 @@ public class HighlightCalendarView extends FrameLayout {
                             }
                         }
                     });
-                    // ToDo investigate on how to set a custom layout to the items displayed within the menu
+
                     // this is useful for displaying more details for a item
                     // builder.setView()
                     AlertDialog menu = builder.create();

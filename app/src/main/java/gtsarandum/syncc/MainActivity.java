@@ -2,8 +2,10 @@ package gtsarandum.syncc;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +16,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import de.cyclingsir.helper.calendar.DateEvent;
@@ -71,11 +75,35 @@ public class MainActivity extends Activity
                     @Override
                     public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth) {
                         //create AlertDialog - create new event? yes|no
+                        final Calendar date= Calendar.getInstance();
+                        date.set(year,month,dayOfMonth);
+                        AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext());
+                        builder.setMessage(R.string.create_event_message);
+                        builder.setPositiveButton(R.string.create_event_yes,new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                                Intent intent=new Intent(getApplicationContext(),CreateNewCalendarEventActivity.class);
+                                intent.putExtra(CreateNewCalendarEventActivity.HAS_DATE,true);
+                                intent.putExtra(CreateNewCalendarEventActivity.DATE, date.getTimeInMillis());
+                                startActivity(intent);
+                            }
+                        });
+                        builder.setNegativeButton(R.string.create_event_no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
                     }
 
                     @Override
                     public void onEventDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth, List<DateEvent> list){
-                        test(String.valueOf(list.size()));
+                        //update content with fragment in InformationDrawer
+                        EventDisplayFragment fragment=EventDisplayFragment.getInstance(dateEventToSynccEvent(list));
+                        informationDrawer.updateContent(fragment);
+
+                        //open drawer on GravityCompat.END site --> right site
                         drawerLayout.openDrawer(GravityCompat.END);
                     }
 
@@ -129,6 +157,14 @@ public class MainActivity extends Activity
         }
 
         onSectionAttached(position);
+    }
+
+    private ArrayList<SynccEvent> dateEventToSynccEvent(List<DateEvent> list){
+        ArrayList<SynccEvent> synccEventArrayList=new ArrayList<SynccEvent>();
+
+
+
+        return synccEventArrayList;
     }
 
     private void replaceContainer(Fragment fragment){

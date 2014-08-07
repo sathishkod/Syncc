@@ -91,7 +91,6 @@ public class CalendarFragment extends Fragment
 
                 @Override
                 public void onEventSelected(DateEvent event) {
-                    //TODO look into this method and figure out what it does
                     if (listener!=null){
                         listener.onEventSelected(event);
                     }
