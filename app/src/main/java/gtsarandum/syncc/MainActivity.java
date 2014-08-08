@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -71,6 +72,7 @@ public class MainActivity extends Activity
 
                 CalendarFragment calendarFragment=new CalendarFragment();
                 //setup
+
                 calendarFragment.setListener(new CalendarFragment.customOnCalendarInteractionListener() {
                     @Override
                     public void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth) {
@@ -122,6 +124,7 @@ public class MainActivity extends Activity
 
                     }
                 });
+
                 replaceContainer(calendarFragment);
                 break;
             case 1://open contacts

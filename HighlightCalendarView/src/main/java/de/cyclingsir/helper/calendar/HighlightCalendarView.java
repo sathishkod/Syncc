@@ -1591,10 +1591,6 @@ public class HighlightCalendarView extends FrameLayout {
             return false;
         }
 
-        public boolean isDayHasEvents(){
-            return dayHasEvents;
-        }
-
         /**
          * Maintains the same hour/min/sec but moves the day to the tapped day.
          *

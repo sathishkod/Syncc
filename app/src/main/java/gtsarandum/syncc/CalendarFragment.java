@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import net.zaim.decoratecalendarview.DecorateCalendarView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,11 +28,13 @@ import de.cyclingsir.helper.calendar.HighlightCalendarView;
 public class CalendarFragment extends Fragment
 {
     //attr
+    private FrameLayout frameLayout;
+
+    //Highlight Calendar
+
     ArrayList<SynccEvent> synccEvents;
     private HighlightCalendarView highlightCalendarView;
-    private FrameLayout frameLayout;
     private customOnCalendarInteractionListener listener;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,13 @@ public class CalendarFragment extends Fragment
             highlightCalendarView=(HighlightCalendarView) frameLayout.findViewById(R.id.calendar);
             highlightCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
             highlightCalendarView.setShowWeekNumber(false);
+
+            //decorative calender
+            /*
+            decorateCalendarView=(DecorateCalendarView) frameLayout.findViewById(R.id.calendar);
+            Bundle calenderArgs =new Bundle();
+            calenderArgs.putString(DecorateCalendarView.BUNDLE_KEY_BEGINNING_DAY_OF_WEEK, String.valueOf(Calendar.MONDAY));
+            decorateCalendarView.initCalendar(this.fragmentManager,calenderArgs);*/
         }else {
             test("frameLayout=null");
         }
@@ -182,8 +194,7 @@ public class CalendarFragment extends Fragment
 
         switch (item.getItemId()){
             case R.id.action_go_to_today://go to today
-                highlightCalendarView.setDate(Calendar.getInstance().getTimeInMillis(),true,true);
-                //TODO find working way to go to today when actionbar icon is clicked
+
             default:break;
         }
 
@@ -202,10 +213,12 @@ public class CalendarFragment extends Fragment
     public void setListener(customOnCalendarInteractionListener listener){
         this.listener=listener;
     }
+
     //makes a toast that says the given charSequence
     public void test(CharSequence charSequence){
         Toast.makeText(getActivity().getApplicationContext(), charSequence, Toast.LENGTH_SHORT).show();
     }
+
 
     public interface customOnCalendarInteractionListener {
         void onDaySelected(HighlightCalendarView view, int year, int month, int dayOfMonth);
