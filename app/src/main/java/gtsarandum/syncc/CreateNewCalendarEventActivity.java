@@ -62,9 +62,9 @@ public class CreateNewCalendarEventActivity extends FragmentActivity {
         Calendar calendar=Calendar.getInstance();
         calendar.setTimeInMillis(calendarMillis);
         this.fromDateTimeValue.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.HOUR_OF_DAY));
+                calendar.get(Calendar.DAY_OF_MONTH));
         this.toDateTimeValue.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.HOUR_OF_DAY));
+                calendar.get(Calendar.DAY_OF_MONTH));
         this.toDateTimeValue.set(Calendar.HOUR_OF_DAY,fromDateTimeValue.get(Calendar.HOUR_OF_DAY)+1);
     }
 

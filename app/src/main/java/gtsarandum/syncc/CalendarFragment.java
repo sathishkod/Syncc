@@ -61,13 +61,6 @@ public class CalendarFragment extends Fragment
             highlightCalendarView=(HighlightCalendarView) frameLayout.findViewById(R.id.calendar);
             highlightCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
             highlightCalendarView.setShowWeekNumber(false);
-
-            //decorative calender
-            /*
-            decorateCalendarView=(DecorateCalendarView) frameLayout.findViewById(R.id.calendar);
-            Bundle calenderArgs =new Bundle();
-            calenderArgs.putString(DecorateCalendarView.BUNDLE_KEY_BEGINNING_DAY_OF_WEEK, String.valueOf(Calendar.MONDAY));
-            decorateCalendarView.initCalendar(this.fragmentManager,calenderArgs);*/
         }else {
             test("frameLayout=null");
         }
@@ -119,7 +112,7 @@ public class CalendarFragment extends Fragment
     }
 
     private void fillSynccEventsList(){
-        int id=getCalendarID();
+//        int id=getCalendarID();
         //get all events and put into list to give the highlightcalendarview
 
         //TODO gets phantom events? fix it so it only has events that actually take place
@@ -141,14 +134,14 @@ public class CalendarFragment extends Fragment
         if (cursor.moveToFirst()){
             do {
                 synccEvents.add(new SynccEvent(
-                        cursor.getString(0),
-                        cursor.getString(1),
-                        cursor.getLong(2),
-                        cursor.getLong(3)
+                        cursor.getString(0),    //id
+                        cursor.getString(1),    //title
+                        cursor.getLong(2),      //begin
+                        cursor.getLong(3),      //end
+                        cursor.getString(4),    //description
+                        cursor.getString(5)     //location
                 ));
 
-                synccEvents.get(synccEvents.size()-1).setDescription(cursor.getString(4));
-                synccEvents.get(synccEvents.size()-1).setLocation(cursor.getString(5));
             } while (cursor.moveToNext());
         }
 
@@ -169,15 +162,13 @@ public class CalendarFragment extends Fragment
                 null,
                 null
         );
-
-        //TODO shows events from the past - why? fix!
-
+/*
         if (cursor.moveToFirst()){
             cursor.moveToNext();
             cursor.moveToNext();
             test(cursor.getString(1));
         }
-
+*/
         return 0;
     }
 

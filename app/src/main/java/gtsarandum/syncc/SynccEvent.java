@@ -28,6 +28,15 @@ public class SynccEvent implements DateEvent {
         this.end=end;
     }
 
+    public SynccEvent(String id, String title, long begin, long end, String description, String location){
+        this.id=id;
+        this.title=title;
+        this.begin=begin;
+        this.end=end;
+        this.description=description;
+        this.location=location;
+    }
+
     //getter
     public String getId(){return id;}
     public String getTitle(){return title;}
