@@ -11,24 +11,33 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class ContactFragment extends ListFragment {
 
     //attr
     private ContactAdapter contactAdapter;
     private customContactClickListener listener;
-
+    private ArrayList<SynccContact> contacts;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         contactAdapter=new ContactAdapter(getActivity().getApplicationContext());
+        contacts=new ArrayList<SynccContact>();
+
+        fillContactList();
 
         //setListAdapter
         setListAdapter(contactAdapter);
 
         fillView();
+    }
+
+    private void fillContactList(){
+
     }
 
     private void fillView(){
