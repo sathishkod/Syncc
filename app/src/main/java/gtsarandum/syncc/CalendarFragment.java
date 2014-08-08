@@ -15,8 +15,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import net.zaim.decoratecalendarview.DecorateCalendarView;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
