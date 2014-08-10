@@ -1,7 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context="gtsarandum.syncc.ContactDisplayFragment"
     android:paddingBottom="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_vertical_margin"
@@ -14,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher"
+        android:contentDescription="@string/contact_photo_description"
         />
 
     <TextView
@@ -37,36 +44,32 @@
         />
 
     <LinearLayout
-        android:id="@+id/linear_container1"
+        android:id="@+id/phone_number_container"
         android:layout_below="@id/contact_detail_divider1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="vertical"
+        />
 
-        <TextView
-            android:id="@+id/contact_detail_phone_number"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="40"
-            />
+    <TextView
+        android:id="@+id/contact_detail_email_label"
+        android:layout_below="@id/phone_number_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/contact_email"
+        android:textColor="@color/primary_text"
+        android:paddingTop="5dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="5dp"
+        />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:paddingBottom="1dp"
-            android:paddingTop="1dp"
-            android:background="@drawable/vertical_divider"
-            />
-
-        <Button
-            android:id="@+id/message_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="7"
-            />
-
-        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/email_container"
+        android:layout_below="@id/contact_detail_email_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        />
 
 </RelativeLayout>
+</ScrollView>
