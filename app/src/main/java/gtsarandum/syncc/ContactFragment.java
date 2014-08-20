@@ -107,7 +107,8 @@ public class ContactFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         if (listener!=null){
-            listener.onContactClick(l,v,position,id);
+            //find out which contact was selected and obtain information on it to make SynccContact
+            listener.onContactClick(l,v,position,id, contacts.get(position));
         }
     }
 
@@ -122,7 +123,7 @@ public class ContactFragment extends ListFragment {
     }
 
     public interface customContactClickListener {
-        void onContactClick(ListView l,View v,int position, long id);
+        void onContactClick(ListView l,View v,int position, long id, SynccContact synccContact);
     }
 
 }

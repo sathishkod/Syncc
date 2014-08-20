@@ -69,7 +69,7 @@ public class MainActivity extends Activity
         switch (position){
             case 0://open calendar
 
-                CalendarFragment calendarFragment=new CalendarFragment();
+                final CalendarFragment calendarFragment=new CalendarFragment();
                 //setup
 
                 calendarFragment.setListener(new CalendarFragment.customOnCalendarInteractionListener() {
@@ -112,11 +112,11 @@ public class MainActivity extends Activity
                 //setup
                 contactFragment.setListener(new ContactFragment.customContactClickListener() {
                     @Override
-                    public void onContactClick(ListView l, View v, int position, long id) {
+                    public void onContactClick(ListView l, View v, int position, long id, SynccContact synccContact) {
+                        //get corresponding contact and make SynccContact
                         //create fragment and update content in information drawer
-                        ContactDisplayFragment contactDisplayFragment=new ContactDisplayFragment();
-                        //setup
-                        contactDisplayFragment.setUp();
+                        ContactDisplayFragment contactDisplayFragment=ContactDisplayFragment.newInstance();
+                        contactDisplayFragment.setUp(synccContact);
                         //update content
                         informationDrawer.updateContent(contactDisplayFragment);
                         //open informationdrawer

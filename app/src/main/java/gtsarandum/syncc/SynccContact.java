@@ -64,6 +64,10 @@ public class SynccContact {
 
     public ArrayList<String> getAllEmails(){return emails;}
 
+    public int getNumberCount(){return numbers.size();}
+
+    public int getEmailCount(){return emails.size();}
+
     //setter
     public void setName(String name){this.name=name;}
 
