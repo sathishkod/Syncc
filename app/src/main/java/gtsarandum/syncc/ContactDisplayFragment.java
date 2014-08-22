@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class ContactDisplayFragment extends Fragment {
 
     //attr
-    private RelativeLayout relativeLayout;
+    private ScrollView scrollView;
     private FrameLayout phoneContainer;
     private FrameLayout emailContainer;
     private SynccContact synccContact;
@@ -35,8 +36,9 @@ public class ContactDisplayFragment extends Fragment {
     }
 
     public void setUp(SynccContact synccContact) {
-        phoneContainer = (FrameLayout) relativeLayout.findViewById(R.id.phone_number_container);
-        emailContainer = (FrameLayout) relativeLayout.findViewById(R.id.email_container);
+        scrollView=(ScrollView)getActivity().findViewById(R.id.contact_detail_scrollview);
+        phoneContainer = (FrameLayout) scrollView.findViewById(R.id.phone_number_container);
+        emailContainer = (FrameLayout) scrollView.findViewById(R.id.email_container);
 
         this.synccContact = synccContact;
 
@@ -79,9 +81,7 @@ public class ContactDisplayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        relativeLayout=(RelativeLayout) inflater.inflate(R.layout.fragment_contact_display, container, false);
-        return relativeLayout;
+        return inflater.inflate(R.layout.fragment_contact_display, container, true);
     }
 
     @Override

@@ -108,7 +108,11 @@ public class ContactFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         if (listener!=null){
             //find out which contact was selected and obtain information on it to make SynccContact
-            listener.onContactClick(l,v,position,id, contacts.get(position));
+
+            //create testcontact
+            SynccContact synccContact=new SynccContact("testname", "0123456789","test@email.test");
+
+            listener.onContactClick(l,v,position,id, synccContact);
         }
     }
 
