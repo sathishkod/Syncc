@@ -64,6 +64,12 @@
     <string name="create_event_message">Create new event?</string>
     <string name="create_event_yes">Yes</string>
     <string name="create_event_no">No</string>
+    <string-array name="contact_long_click_options">
+        <item>Share</item>
+        <item>Call</item>
+        <item>Send message</item>
+        <item>Delete</item>
+    </string-array>
 
     <!-- ContactDisplayFragment -->
     <string name="contact_photo_description">Contact photo</string>

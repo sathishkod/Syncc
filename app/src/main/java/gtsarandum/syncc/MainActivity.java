@@ -127,6 +127,14 @@ public class MainActivity extends Activity
                     @Override
                     public void onContactLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                         //options on long click that should also be available when informationdrawer is open with contact!!
+                        AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext());
+                        builder.setItems(R.array.contact_long_click_options,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        ArrayList<String> options=new ArrayList<String>();
+                                    }
+                                });
                     }
                 });
                 replaceContainer(contactFragment);
