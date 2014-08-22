@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class ContactDisplayFragment extends Fragment {
 
+    //TODO resolve NullPointerException when initiating RootView
+
     //attr
     private ScrollView scrollView;
     private FrameLayout phoneContainer;

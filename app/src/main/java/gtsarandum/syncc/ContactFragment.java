@@ -8,6 +8,7 @@ import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -90,7 +91,20 @@ public class ContactFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
+
+        //enables custom actionbar menu
         setHasOptionsMenu(true);
+
+        //LongClickListener
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (listener!=null){
+                    listener.onContactLongClick(adapterView,view,i,l);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -128,6 +142,7 @@ public class ContactFragment extends ListFragment {
 
     public interface customContactClickListener {
         void onContactClick(ListView l,View v,int position, long id, SynccContact synccContact);
+        void onContactLongClick(AdapterView<?> adapterView, View view, int i, long l);
     }
 
 }

@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -121,6 +122,11 @@ public class MainActivity extends Activity
                         informationDrawer.updateContent(contactDisplayFragment);
                         //open informationdrawer
                         drawerLayout.openDrawer(GravityCompat.END);
+                    }
+
+                    @Override
+                    public void onContactLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        //options on long click that should also be available when informationdrawer is open with contact!!
                     }
                 });
                 replaceContainer(contactFragment);
