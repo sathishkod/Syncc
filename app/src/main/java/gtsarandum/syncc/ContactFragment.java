@@ -113,7 +113,7 @@ public class ContactFragment extends ListFragment {
             //find out which contact was selected and obtain information on it to make SynccContact
 
             //create testcontact
-            SynccContact synccContact=new SynccContact("testname", "0123456789","test@email.test");
+            SynccContact synccContact=new SynccContact("testname", "0123456789",true, "test@email.test");
 
             listener.onContactClick(l,v,position,id, synccContact);
         }
