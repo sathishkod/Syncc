@@ -89,7 +89,6 @@
     <orderEntry type="library" exported="" name="library-extra-1.8.0" level="project" />
     <orderEntry type="module" module-name="HighlightCalendarView" exported="" />
     <orderEntry type="module" module-name="src" exported="" />
-    <orderEntry type="module" module-name="FloatingActionButton" exported="" />
   </component>
 </module>
 

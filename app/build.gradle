@@ -38,5 +38,4 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:library-extra:1.8.+'
     compile 'com.doomonafireball.betterpickers:library:1.5.2'
     compile project(':HighlightCalendarView')
-    compile project(':FloatingActionButton')
 }

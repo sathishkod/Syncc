@@ -1,1 +1,1 @@
-include ':app', ':src', ':HighlightCalendarView', ':FloatingActionButton'
+include ':app', ':src', ':HighlightCalendarView'

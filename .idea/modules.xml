@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FloatingActionButton/FloatingActionButton.iml" filepath="$PROJECT_DIR$/FloatingActionButton/FloatingActionButton.iml" />
       <module fileurl="file://$PROJECT_DIR$/HighlightCalendarView/HighlightCalendarView.iml" filepath="$PROJECT_DIR$/HighlightCalendarView/HighlightCalendarView.iml" />
       <module fileurl="file://$PROJECT_DIR$/Syncc.iml" filepath="$PROJECT_DIR$/Syncc.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
