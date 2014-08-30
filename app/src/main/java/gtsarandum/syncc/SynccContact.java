@@ -2,6 +2,7 @@ package gtsarandum.syncc;
 
 import android.graphics.Bitmap;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 /**
@@ -10,23 +11,36 @@ import java.util.ArrayList;
 public class SynccContact {
 
     //attr
+    private String id;
     private String name;
+    private boolean hasPhoneNumber;
     private ArrayList<String> numbers;
+    private String photoId;
+    private String photoUri;
     private ArrayList<String> emails;
-    private Bitmap photo;
 
     //constructors
-    public SynccContact(String name){
+    public SynccContact(String id, String name){
+        this.id=id;
         this.name=name;
     }
 
-    public SynccContact(String name, String number){
+    public SynccContact(String id, String name,boolean hasPhoneNumber, String number){
+        this.id=id;
         this.name=name;
         numbers=new ArrayList<String>();
         numbers.add(number);
     }
 
-    public SynccContact(String name, String number, String email){
+    public SynccContact(String id, String name, boolean hasPhoneNumber){
+        this.id=id;
+        this.name=name;
+        this.hasPhoneNumber=hasPhoneNumber;
+        this.numbers=new ArrayList<String>();
+    }
+
+    public SynccContact(String id, String name, String number, String email){
+        this.id=id;
         this.name=name;
         numbers=new ArrayList<String>();
         emails=new ArrayList<String>();
@@ -34,14 +48,10 @@ public class SynccContact {
         emails.add(email);
     }
 
-    public SynccContact(String name, String number, Bitmap photo){
-        this.name=name;
-        this.numbers=new ArrayList<String>();
-        numbers.add(number);
-        this.photo=photo;
-    }
 
     //getter
+    public String getId(){return id;}
+
     public String getName(){return name;}
 
     public String getNumberAtPosition(int i){
@@ -74,8 +84,6 @@ public class SynccContact {
     public void setNumbers(ArrayList<String> numbers){this.numbers=numbers;}
 
     public void setEmails(ArrayList<String> emails){this.emails=emails;}
-
-    public void setPhoto(Bitmap photo){this.photo=photo;}
 
     //adder
     public void addNumber(String number){numbers.add(number);}

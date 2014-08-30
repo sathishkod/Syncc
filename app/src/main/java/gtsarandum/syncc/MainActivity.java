@@ -132,7 +132,21 @@ public class MainActivity extends Activity
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        ArrayList<String> options=new ArrayList<String>();
+                                        switch(i){
+                                            case 0://share
+
+                                                break;
+                                            case 1://call
+
+                                                break;
+                                            case 2://send message
+
+                                                break;
+                                            case 3://delete
+
+                                                break;
+                                            default:break;
+                                        }
                                     }
                                 });
                     }
