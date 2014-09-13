@@ -28,6 +28,7 @@ public class SynccContact {
     public SynccContact(String id, String name,boolean hasPhoneNumber, String number){
         this.id=id;
         this.name=name;
+        this.hasPhoneNumber=hasPhoneNumber;
         numbers=new ArrayList<String>();
         numbers.add(number);
     }

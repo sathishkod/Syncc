@@ -70,9 +70,6 @@
         <item>Send message</item>
         <item>Delete</item>
     </string-array>
-
-    <!-- ContactDisplayFragment -->
-    <string name="contact_photo_description">Contact photo</string>
 	
 	<!-- other -->
 	<string name="hello_world">Hello world!</string>

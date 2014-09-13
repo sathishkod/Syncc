@@ -116,12 +116,7 @@ public class MainActivity extends Activity
                     public void onContactClick(ListView l, View v, int position, long id, SynccContact synccContact) {
                         //get corresponding contact and make SynccContact
                         //create fragment and update content in information drawer
-                        ContactDisplayFragment contactDisplayFragment=ContactDisplayFragment.newInstance();
-                        contactDisplayFragment.setUp(synccContact);
-                        //update content
-                        informationDrawer.updateContent(contactDisplayFragment);
-                        //open informationdrawer
-                        drawerLayout.openDrawer(GravityCompat.END);
+                        test(synccContact.getName());
                     }
 
                     @Override
