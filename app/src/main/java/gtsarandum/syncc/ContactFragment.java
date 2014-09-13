@@ -114,7 +114,7 @@ public class ContactFragment extends ListFragment {
 
             //create testcontact
 
-            SynccContact synccContact=new SynccContact("testid", "testname",true, "test@email.test");
+            SynccContact synccContact=new SynccContact("testid", "testname", "test@email.test");
 
             listener.onContactClick(l,v,position,id,synccContact);
         }

@@ -115,12 +115,21 @@ public class MainActivity extends Activity
                     @Override
                     public void onContactClick(ListView l, View v, int position, long id, SynccContact synccContact) {
                         //TODO create fragment and update content in information drawer
-                        test("replacing fragment...");
+                        /*
                         PlaceholderFragment placeholderFragment=new PlaceholderFragment();
                         Bundle bundle=new Bundle();
                         bundle.putString(PlaceholderFragment.TEXT_KEY,"this is a different fragment");
                         placeholderFragment.setArguments(bundle);
-                        informationDrawer.updateContent(placeholderFragment);
+                        informationDrawer.updateContent(placeholderFragment);*/
+
+                        ContactDisplayFragment contactDisplayFragment=new ContactDisplayFragment();
+                        Bundle contact=new Bundle();
+                        contact.putString(ContactDisplayFragment.CONTACT_ID,synccContact.getId());
+                        contact.putString(ContactDisplayFragment.CONTACT_NAME,synccContact.getName());
+                        contact.putString(ContactDisplayFragment.CONTACT_NUMBER,synccContact.getNumberAtPosition(0));
+
+                        informationDrawer.updateContent(contactDisplayFragment);
+
                         drawerLayout.openDrawer(GravityCompat.END);
                     }
 

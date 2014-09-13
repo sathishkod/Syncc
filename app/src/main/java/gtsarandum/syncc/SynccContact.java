@@ -13,7 +13,6 @@ public class SynccContact {
     //attr
     private String id;
     private String name;
-    private boolean hasPhoneNumber;
     private ArrayList<String> numbers;
     private String photoId;
     private String photoUri;
@@ -25,19 +24,11 @@ public class SynccContact {
         this.name=name;
     }
 
-    public SynccContact(String id, String name,boolean hasPhoneNumber, String number){
+    public SynccContact(String id, String name, String number){
         this.id=id;
         this.name=name;
-        this.hasPhoneNumber=hasPhoneNumber;
         numbers=new ArrayList<String>();
         numbers.add(number);
-    }
-
-    public SynccContact(String id, String name, boolean hasPhoneNumber){
-        this.id=id;
-        this.name=name;
-        this.hasPhoneNumber=hasPhoneNumber;
-        this.numbers=new ArrayList<String>();
     }
 
     public SynccContact(String id, String name, String number, String email){

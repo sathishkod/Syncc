@@ -70,7 +70,6 @@ public class InformationDrawer extends Fragment {
         FragmentTransaction transaction=getFragmentManager().beginTransaction();
         transaction.replace(R.id.info_container,fragment);
         transaction.commit();
-        test("done!");
     }
 
     private void test(CharSequence charSequence){
