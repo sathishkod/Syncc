@@ -14,12 +14,13 @@ import android.widget.TextView;
 
 public class PlaceholderFragment extends Fragment {
 
+    //keys
+    public static final String TEXT_KEY="text";
     //attr
     private FrameLayout frameLayout;
+    private String text;
 
-    public PlaceholderFragment() {
-
-    }
+    public PlaceholderFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +34,13 @@ public class PlaceholderFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         TextView textView=(TextView)frameLayout.findViewById(R.id.placeholder_textview);
-        textView.setText(getResources().getString(R.string.info_placeholder_text));
+        textView.setText(text);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        text=this.getArguments().getString(TEXT_KEY);
     }
 
 }

@@ -114,9 +114,14 @@ public class MainActivity extends Activity
                 contactFragment.setListener(new ContactFragment.customContactClickListener() {
                     @Override
                     public void onContactClick(ListView l, View v, int position, long id, SynccContact synccContact) {
-                        //get corresponding contact and make SynccContact
-                        //create fragment and update content in information drawer
-                        test(synccContact.getName());
+                        //TODO create fragment and update content in information drawer
+                        test("replacing fragment...");
+                        PlaceholderFragment placeholderFragment=new PlaceholderFragment();
+                        Bundle bundle=new Bundle();
+                        bundle.putString(PlaceholderFragment.TEXT_KEY,"this is a different fragment");
+                        placeholderFragment.setArguments(bundle);
+                        informationDrawer.updateContent(placeholderFragment);
+                        drawerLayout.openDrawer(GravityCompat.END);
                     }
 
                     @Override

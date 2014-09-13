@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 public class InformationDrawer extends Fragment {
@@ -22,6 +23,9 @@ public class InformationDrawer extends Fragment {
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow_reverse, GravityCompat.END);
         //update content with placeholder
         PlaceholderFragment placeholderFragment=new PlaceholderFragment();
+        Bundle bundle=new Bundle();
+        bundle.putString(PlaceholderFragment.TEXT_KEY,getResources().getString(R.string.info_placeholder_text));
+        placeholderFragment.setArguments(bundle);
 
         updateContent(placeholderFragment);
     }
@@ -66,6 +70,11 @@ public class InformationDrawer extends Fragment {
         FragmentTransaction transaction=getFragmentManager().beginTransaction();
         transaction.replace(R.id.info_container,fragment);
         transaction.commit();
+        test("done!");
+    }
+
+    private void test(CharSequence charSequence){
+        Toast.makeText(getActivity().getApplicationContext(),charSequence,Toast.LENGTH_SHORT).show();
     }
 
 }
