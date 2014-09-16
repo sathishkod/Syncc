@@ -15,6 +15,7 @@ public class SynccContact {
     private String name;
     private boolean hasPhoneNumber;
     private String number;
+    private boolean hasPhotoInfo;
     private String photoId;
     private String photoThumbUri;
     private String photoUri;
@@ -31,6 +32,7 @@ public class SynccContact {
             this.hasPhoneNumber=false;
             this.number="";
         }
+        this.hasPhotoInfo=false;
     }
 
     //constructor w/ everything
@@ -48,6 +50,7 @@ public class SynccContact {
         this.photoId=photoId;
         this.photoThumbUri=photoThumbUri;
         this.photoUri=photoUri;
+        this.hasPhotoInfo=true;
     }
 
     //getter
@@ -71,6 +74,8 @@ public class SynccContact {
 
     public String getPhotoUri(){return photoUri;}
 
+    public boolean isHasPhotoInfo(){return hasPhotoInfo;}
+
     //setter
     public void setName(String name){this.name=name;}
 
@@ -78,6 +83,14 @@ public class SynccContact {
         //replaces old number
         this.number=number;
         this.hasPhoneNumber=true;
+    }
+
+    public void addPhotoInfo(String photoId, String photoThumbUri, String photoUri) {
+        //replaces old data
+        this.photoThumbUri=photoThumbUri;
+        this.photoUri=photoUri;
+        this.photoId=photoId;
+        this.hasPhotoInfo=true;
     }
 
     //other methods

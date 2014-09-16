@@ -119,9 +119,6 @@ public class ContactFragment extends ListFragment {
         if (listener!=null){
             //TODO : filter out dividers... -.-
 
-            //create testcontact
-
-            //contacts.get(position) -> IndexOutOfBoundsException :(
             listener.onContactClick(l,v,position,id,contacts.get(position));
         }
     }
