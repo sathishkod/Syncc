@@ -137,28 +137,7 @@ public class MainActivity extends Activity
                     @Override
                     public void onContactLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                         //options on long click that should also be available when informationdrawer is open with contact!!
-                        AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext());
-                        builder.setItems(R.array.contact_long_click_options,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        switch(i){
-                                            case 0://share
-
-                                                break;
-                                            case 1://call
-
-                                                break;
-                                            case 2://send message
-
-                                                break;
-                                            case 3://delete
-
-                                                break;
-                                            default:break;
-                                        }
-                                    }
-                                });
+                        contactLongClickDialog();
                     }
                 });
                 replaceContainer(contactFragment);
@@ -178,6 +157,32 @@ public class MainActivity extends Activity
         }
 
         onSectionAttached(position);
+    }
+
+    private void contactLongClickDialog(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setItems(R.array.contact_long_click_options,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        switch(i){
+                            case 0://share
+
+                                break;
+                            case 1://call
+
+                                break;
+                            case 2://send message
+
+                                break;
+                            case 3://delete
+
+                                break;
+                            default:break;
+                        }
+                    }
+                });
+        builder.create().show();
     }
 
     private void newEventDialog(int year,int month,int dayOfMonth){

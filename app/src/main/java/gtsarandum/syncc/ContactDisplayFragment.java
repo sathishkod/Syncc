@@ -53,14 +53,18 @@ public class ContactDisplayFragment extends Fragment {
     }
 
     private void makeSynccContact(){
-        synccContact=new SynccContact(
-                getArguments().getString(CONTACT_ID),
-                getArguments().getString(CONTACT_NAME),
-                getArguments().getString(CONTACT_NUMBER)
-        );
+        Bundle contact=getArguments();
+        if (contact!=null) {
+            synccContact = new SynccContact(
+                    contact.getString(CONTACT_ID),
+                    contact.getString(CONTACT_NAME),
+                    contact.getString(CONTACT_NUMBER)
+            );
 
-        test(synccContact.getName());
-
+            test(synccContact.getName());
+        } else {
+            test("no arguments set...");
+        }
     }
 
     private void test(CharSequence charSequence){

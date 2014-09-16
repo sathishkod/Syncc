@@ -110,12 +110,12 @@ public class ContactFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         if (listener!=null){
-            //find out which contact was selected and obtain information on it to make SynccContact
+            //TODO : find out which contact was selected and obtain information on it to make SynccContact
 
             //create testcontact
-
             SynccContact synccContact=new SynccContact("testid", "testname", "test@email.test");
 
+            //contacts.get(position) -> IndexOutOfBoundsException :(
             listener.onContactClick(l,v,position,id,synccContact);
         }
     }
