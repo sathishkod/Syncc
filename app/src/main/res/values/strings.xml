@@ -70,6 +70,9 @@
         <item>Send message</item>
         <item>Delete</item>
     </string-array>
+
+    <!-- ContactDisplayFragment -->
+    <string name="no_number_available">No phone number available</string>
 	
 	<!-- other -->
 	<string name="hello_world">Hello world!</string>

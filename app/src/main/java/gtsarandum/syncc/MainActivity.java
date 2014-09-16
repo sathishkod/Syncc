@@ -126,10 +126,7 @@ public class MainActivity extends Activity
 
 
                         ContactDisplayFragment contactDisplayFragment=new ContactDisplayFragment();
-                        Bundle contact=new Bundle();
-                        contact.putString(ContactDisplayFragment.CONTACT_ID,synccContact.getId());
-                        contact.putString(ContactDisplayFragment.CONTACT_NAME,synccContact.getName());
-                        contactDisplayFragment.setArguments(contact);
+                        contactDisplayFragment.setArguments(contactToBundle(synccContact));
 
                         informationDrawer.updateContent(contactDisplayFragment);
 
@@ -159,6 +156,18 @@ public class MainActivity extends Activity
         }
 
         onSectionAttached(position);
+    }
+
+    private Bundle contactToBundle(SynccContact synccContact){
+        Bundle bundle=new Bundle();
+        bundle.putString(ContactDisplayFragment.CONTACT_ID, synccContact.getId());
+        bundle.putString(ContactDisplayFragment.CONTACT_NAME, synccContact.getName());
+        bundle.putInt(ContactDisplayFragment.CONTACT_HAS_PHONE_NUMBER, synccContact.getHasPhoneNumberValue());
+        bundle.putString(ContactDisplayFragment.CONTACT_NUMBER, synccContact.getNumber());
+        bundle.putString(ContactDisplayFragment.CONTACT_PHOTO_ID, synccContact.getPhotoId());
+        bundle.putString(ContactDisplayFragment.CONTACT_PHOTO_THUMBNAIL_URI, synccContact.getPhotoThumbUri());
+        bundle.putString(ContactDisplayFragment.CONTACT_PHOTO_URI, synccContact.getPhotoUri());
+        return bundle;
     }
 
     private void contactLongClickDialog(AdapterView<?> adapterView, View view, int position, long id){

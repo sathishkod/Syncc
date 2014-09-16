@@ -59,6 +59,13 @@
 
     <color name="pink_a700">#c51162</color>
 
+    <!-- grey -->
+    <color name="grey_900">#212121</color>
+
+    <color name="grey_500">#9e9e9e</color>
+
+    <color name="grey_200">#eeeeee</color>
+
     <!-- text colors -->
     <color name="primary_text">#212121</color>
 

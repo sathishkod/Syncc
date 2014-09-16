@@ -4,10 +4,29 @@
     android:layout_height="match_parent"
     tools:context="gtsarandum.syncc.ContactDisplayFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/contactdetails_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_900"
+        android:textColor="@color/grey_200"
+        android:textSize="25sp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <TextView
+        android:id="@+id/contactdetails_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contactdetails_name"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="22sp"
+        />
+
+    </RelativeLayout>
 </FrameLayout>

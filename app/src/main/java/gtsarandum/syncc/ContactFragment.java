@@ -124,7 +124,7 @@ public class ContactFragment extends ListFragment {
             TextView textView=(TextView) v.findViewById(R.id.text);
             position=position-getNumbersToRemove(textView.getText().charAt(0))-1;
 
-            listener.onContactClick(l,v,position,id,contacts.get(position));
+            listener.onContactClick(l,v,position,id,contacts.get(getContactPositionByName(textView.getText().toString())));
         }
     }
 
@@ -141,6 +141,20 @@ public class ContactFragment extends ListFragment {
     public interface customContactClickListener {
         void onContactClick(ListView l,View v,int position, long id, SynccContact synccContact);
         void onContactLongClick(AdapterView<?> adapterView, View view, int i, long l);
+    }
+
+    private int getContactPositionByName(String name){
+        int i=0;
+
+        while (i<contacts.size()){
+            if (contacts.get(i).getName().equals(name)){
+                break;
+            } else {
+                i++;
+            }
+        }
+
+        return i;
     }
 
     private int getNumbersToRemove(char c){

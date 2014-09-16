@@ -28,7 +28,7 @@ public class SynccContact {
         if(hasPhoneNumber==1){
             this.hasPhoneNumber=true;
             this.number=number;
-        } else {
+        } else if (hasPhoneNumber==0) {
             this.hasPhoneNumber=false;
             this.number="";
         }
@@ -43,7 +43,7 @@ public class SynccContact {
         if(hasPhoneNumber==1){
             this.hasPhoneNumber=true;
             this.number=number;
-        } else {
+        } else if (hasPhoneNumber==0) {
             this.hasPhoneNumber=false;
             this.number="";
         }
@@ -75,6 +75,14 @@ public class SynccContact {
     public String getPhotoUri(){return photoUri;}
 
     public boolean isHasPhotoInfo(){return hasPhotoInfo;}
+
+    public int getHasPhoneNumberValue(){
+        if (hasPhoneNumber){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
     //setter
     public void setName(String name){this.name=name;}
