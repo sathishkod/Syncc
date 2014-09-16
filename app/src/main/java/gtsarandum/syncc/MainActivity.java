@@ -137,7 +137,7 @@ public class MainActivity extends Activity
                     @Override
                     public void onContactLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                         //options on long click that should also be available when informationdrawer is open with contact!!
-                        contactLongClickDialog();
+                        contactLongClickDialog(adapterView,view,i,l);
                     }
                 });
                 replaceContainer(contactFragment);
@@ -159,7 +159,7 @@ public class MainActivity extends Activity
         onSectionAttached(position);
     }
 
-    private void contactLongClickDialog(){
+    private void contactLongClickDialog(AdapterView<?> adapterView, View view, int position, long id){
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setItems(R.array.contact_long_click_options,
                 new DialogInterface.OnClickListener() {
@@ -167,16 +167,16 @@ public class MainActivity extends Activity
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch(i){
                             case 0://share
-
+                                    //TODO : make new activity to select information to share MOST IMPORTANT!!!
                                 break;
                             case 1://call
-
+                                    //give intent to system
                                 break;
                             case 2://send message
-
+                                    //give intent to system
                                 break;
                             case 3://delete
-
+                                    //maybe give intent to system?
                                 break;
                             default:break;
                         }
@@ -269,10 +269,19 @@ public class MainActivity extends Activity
                 break;
             case R.id.action_go_to_today://go to today
 
+                break;
+            case R.id.action_new_contact:
+                newContact();
+                break;
             default:break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void newContact(){
+        Intent intent=new Intent(this,CreateContactActivity.class);
+        startActivity(intent);
     }
 
     private void newCalendarEvent(){

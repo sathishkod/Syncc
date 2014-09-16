@@ -40,8 +40,8 @@
         </activity>
         <activity
             android:name=".CreateContactActivity"
-            android:label="@string/title_activity_create_contact"> <!--
-            android:parentActivityName=".MainActivity" > -->
+            android:label="@string/title_activity_create_contact"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="gtsarandum.syncc.MainActivity" />
