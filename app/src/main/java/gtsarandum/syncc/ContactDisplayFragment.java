@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
@@ -19,6 +20,7 @@ public class ContactDisplayFragment extends Fragment {
 
     //attr
     private SynccContact synccContact;
+    private FrameLayout frameLayout;
 
     public ContactDisplayFragment() {
         // Required empty public constructor
@@ -34,7 +36,8 @@ public class ContactDisplayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact_display, container, false);
+        frameLayout=(FrameLayout)inflater.inflate(R.layout.fragment_contact_display,container,false);
+        return frameLayout;
     }
 
     @Override
@@ -57,6 +60,7 @@ public class ContactDisplayFragment extends Fragment {
         );
 
         test(synccContact.getName());
+
     }
 
     private void test(CharSequence charSequence){
