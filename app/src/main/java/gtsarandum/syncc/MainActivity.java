@@ -127,6 +127,7 @@ public class MainActivity extends Activity
                         contact.putString(ContactDisplayFragment.CONTACT_ID,synccContact.getId());
                         contact.putString(ContactDisplayFragment.CONTACT_NAME,synccContact.getName());
                         contact.putString(ContactDisplayFragment.CONTACT_NUMBER,synccContact.getNumberAtPosition(0));
+                        contactDisplayFragment.setArguments(contact);
 
                         informationDrawer.updateContent(contactDisplayFragment);
 
