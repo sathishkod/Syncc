@@ -110,12 +110,10 @@ class ContactAdapter extends BaseAdapter {
                 case TYPE_ITEM:
                     convertView = mInflater.inflate(R.layout.snippet_item1, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.text);
-                    holder.imageView=(ImageView)convertView.findViewById(R.id.contact_image);
                     if (contactids.get(position)!=null){
                         Uri photo=getPhotoUriFromID(contactids.get(position));
                         if (photo!=null){
                             Drawable drawable=getDrawableFromUri(photo);
-                            holder.imageView.setImageDrawable(drawable);
                         }
                     }
                     break;
@@ -178,7 +176,6 @@ class ContactAdapter extends BaseAdapter {
 
     public static class ViewHolder {
         public TextView textView;
-        public ImageView imageView;
     }
 
 }

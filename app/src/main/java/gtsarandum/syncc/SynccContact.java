@@ -13,73 +13,77 @@ public class SynccContact {
     //attr
     private String id;
     private String name;
-    private ArrayList<String> numbers;
+    private boolean hasPhoneNumber;
+    private String number;
     private String photoId;
+    private String photoThumbUri;
     private String photoUri;
-    private ArrayList<String> emails;
 
     //constructors
-    public SynccContact(String id, String name){
+
+    public SynccContact(String id, String name, int hasPhoneNumber, String number){
         this.id=id;
         this.name=name;
+        if(hasPhoneNumber==1){
+            this.hasPhoneNumber=true;
+            this.number=number;
+        } else {
+            this.hasPhoneNumber=false;
+            this.number="";
+        }
     }
 
-    public SynccContact(String id, String name, String number){
+    //constructor w/ everything
+    public SynccContact(String id, String name, int hasPhoneNumber, String number,
+                        String photoId, String photoThumbUri, String photoUri){
         this.id=id;
         this.name=name;
-        numbers=new ArrayList<String>();
-        numbers.add(number);
+        if(hasPhoneNumber==1){
+            this.hasPhoneNumber=true;
+            this.number=number;
+        } else {
+            this.hasPhoneNumber=false;
+            this.number="";
+        }
+        this.photoId=photoId;
+        this.photoThumbUri=photoThumbUri;
+        this.photoUri=photoUri;
     }
-
-    public SynccContact(String id, String name, String number, String email){
-        this.id=id;
-        this.name=name;
-        numbers=new ArrayList<String>();
-        emails=new ArrayList<String>();
-        numbers.add(number);
-        emails.add(email);
-    }
-
 
     //getter
     public String getId(){return id;}
 
     public String getName(){return name;}
 
-    public String getNumberAtPosition(int i){
-        if (i>numbers.size()){
-            return null;
+    public boolean isHasPhoneNumber(){return hasPhoneNumber;}
+
+    public String getNumber(){
+        if (hasPhoneNumber){
+            return number;
         } else {
-            return numbers.get(i);
+            return null;
         }
     }
 
-    public ArrayList<String> getAllNumbers(){return numbers;}
+    public String getPhotoId(){return photoId;}
 
-    public String getEmailAtPosition(int i){
-        if (i>emails.size()){
-            return null;
-        } else {
-            return emails.get(i);
-        }
-    }
+    public String getPhotoThumbUri(){return photoThumbUri;}
 
-    public ArrayList<String> getAllEmails(){return emails;}
-
-    public int getNumberCount(){return numbers.size();}
-
-    public int getEmailCount(){return emails.size();}
+    public String getPhotoUri(){return photoUri;}
 
     //setter
     public void setName(String name){this.name=name;}
 
-    public void setNumbers(ArrayList<String> numbers){this.numbers=numbers;}
+    public void setNumber(String number){
+        //replaces old number
+        this.number=number;
+        this.hasPhoneNumber=true;
+    }
 
-    public void setEmails(ArrayList<String> emails){this.emails=emails;}
-
-    //adder
-    public void addNumber(String number){numbers.add(number);}
-
-    public void addEmail(String email){emails.add(email);}
+    //other methods
+    public void deleteNumber(){
+        this.number="";
+        this.hasPhoneNumber=false;
+    }
 
 }

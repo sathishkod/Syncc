@@ -34,12 +34,11 @@ public class ContactFragment extends ListFragment {
                 new String[]{
                         ContactsContract.CommonDataKinds.Phone._ID,//0
                         ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,//1
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID,//2
-                        ContactsContract.CommonDataKinds.Phone.HAS_PHONE_NUMBER,//3
-                        ContactsContract.CommonDataKinds.Phone.NUMBER,//4
-                        ContactsContract.Contacts.PHOTO_ID,//5
-                        ContactsContract.Contacts.PHOTO_THUMBNAIL_URI,//6
-                        ContactsContract.Contacts.PHOTO_URI
+                        ContactsContract.CommonDataKinds.Phone.HAS_PHONE_NUMBER,//2
+                        ContactsContract.CommonDataKinds.Phone.NUMBER,//3
+                        ContactsContract.Contacts.PHOTO_ID,//4
+                        ContactsContract.Contacts.PHOTO_THUMBNAIL_URI,//5
+                        ContactsContract.Contacts.PHOTO_URI//6
                 },
                 null,
                 null,
@@ -68,8 +67,16 @@ public class ContactFragment extends ListFragment {
 
                 contactAdapter.addItem(name,id);
 
-                //add contact to list
-
+                //add contact to contact list
+                contacts.add(new SynccContact(
+                        contactCursor.getString(0),
+                        contactCursor.getString(1),
+                        contactCursor.getInt(2),
+                        contactCursor.getString(3),
+                        contactCursor.getString(4),
+                        contactCursor.getString(5),
+                        contactCursor.getString(6)
+                ));
 
                 contactCursor.moveToNext();
             }
@@ -110,13 +117,12 @@ public class ContactFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         if (listener!=null){
-            //TODO : find out which contact was selected and obtain information on it to make SynccContact
+            //TODO : filter out dividers... -.-
 
             //create testcontact
-            SynccContact synccContact=new SynccContact("testid", "testname", "test@email.test");
 
             //contacts.get(position) -> IndexOutOfBoundsException :(
-            listener.onContactClick(l,v,position,id,synccContact);
+            listener.onContactClick(l,v,position,id,contacts.get(position));
         }
     }
 

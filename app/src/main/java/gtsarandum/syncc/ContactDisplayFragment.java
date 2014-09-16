@@ -55,13 +55,7 @@ public class ContactDisplayFragment extends Fragment {
     private void makeSynccContact(){
         Bundle contact=getArguments();
         if (contact!=null) {
-            synccContact = new SynccContact(
-                    contact.getString(CONTACT_ID),
-                    contact.getString(CONTACT_NAME),
-                    contact.getString(CONTACT_NUMBER)
-            );
-
-            test(synccContact.getName());
+            test(contact.getString(CONTACT_NAME));
         } else {
             test("no arguments set...");
         }
