@@ -7,9 +7,13 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class ContactDisplayFragment extends Fragment {
@@ -31,6 +35,7 @@ public class ContactDisplayFragment extends Fragment {
     //layout-attr
     TextView nameTextView;
     TextView numberTextView;
+    ListView emailsList;
 
     public ContactDisplayFragment() {
         // Required empty public constructor
@@ -54,9 +59,29 @@ public class ContactDisplayFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         synccContact=bundleToContact();
         nameTextView=(TextView) frameLayout.findViewById(R.id.contactdetails_name);
-        numberTextView=(TextView) frameLayout.findViewById(R.id.contactdetails_number);
+        numberTextView=(TextView) frameLayout.findViewById(R.id.contactdetails_phone_number);
+        emailsList=(ListView) frameLayout.findViewById(R.id.contactdetails_emails);
 
         nameTextView.setText(synccContact.getName());
+
+        if (synccContact.isHasPhoneNumber()) {
+            numberTextView.setText(synccContact.getNumber());
+        } else {
+            test("no numbers...");
+        }
+
+        /*
+        if (synccContact.getEmails().size()>0) {
+            ArrayAdapter<String> emailAdapter = new ArrayAdapter<String>(
+                    getActivity(),
+                    android.R.layout.simple_list_item_1,
+                    synccContact.getEmails()
+            );
+            emailsList.setAdapter(emailAdapter);
+            emailsList.setVisibility(View.GONE);
+        } else {
+            test("no emails...");
+        }*/
     }
 
     @Override
@@ -66,14 +91,12 @@ public class ContactDisplayFragment extends Fragment {
     }
 
     private SynccContact bundleToContact(){
-        SynccContact synccContact=new SynccContact(
+        return new SynccContact(
                 getActivity(),
                 getArguments().getLong(CONTACT_ID),
                 getArguments().getString(CONTACT_NAME),
                 getArguments().getInt(CONTACT_HAS_PHONE_NUMBER)
         );
-
-        return synccContact;
     }
 
     private void test(CharSequence charSequence){

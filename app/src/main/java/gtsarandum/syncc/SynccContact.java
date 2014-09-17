@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.provider.ContactsContract;
+import android.widget.Toast;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -18,11 +19,13 @@ public class SynccContact {
     private long id;
     private String name;
     private boolean hasPhoneNumber;
-    private ArrayList<String> numbers;
+    private String number;
     private boolean hasPhotoInfo;
     private String photoId;
     private String photoThumbUri;
     private String photoUri;
+
+    private ArrayList<String> emails;
 
     //extra
     private Context context;
@@ -42,6 +45,8 @@ public class SynccContact {
             default:break;
         }
         this.hasPhotoInfo=true;
+
+        this.emails=new ArrayList<String>();
     }
 
     //getter
@@ -59,9 +64,8 @@ public class SynccContact {
         }
     }
 
-    //TODO : update methods to get data by contact id
-
-    public ArrayList<String> getNumbers(){
+    public String getNumber(){
+        //gets numbers by id
         if (hasPhoneNumber){
 
             ContentResolver contentResolver=context.getContentResolver();
@@ -71,9 +75,12 @@ public class SynccContact {
                     ContactsContract.Contacts._ID+" = "+id,
                     null,
                     null
-            );
+            ); //TODO : resolve empty cursor error
+            //contact seems to have no data available?
 
             if (cursor.moveToFirst()){
+
+                cursor.moveToNext();
 
                 String contactId=cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
 
@@ -85,16 +92,55 @@ public class SynccContact {
                         null);
 
                 if (phones.moveToFirst()){
-                    do {
-                        this.numbers.add(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
-                    } while (phones.moveToNext());
+                    while (phones.moveToNext()) {
+                        this.number=phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    }
                 }
+
+                phones.close();
+            } else {
+                test("cursor error...");
             }
 
-            return numbers;
+            cursor.close();
+
+            return number;
         } else {
             return null;
         }
+    }
+
+    public ArrayList<String> getEmails(){
+        //gets emails by id
+        ContentResolver contentResolver=context.getContentResolver();
+        Cursor cursor=contentResolver.query(
+                ContactsContract.Contacts.CONTENT_URI,
+                null,
+                ContactsContract.Contacts._ID+" = "+id,
+                null,
+                null
+        );
+
+        if (cursor.moveToFirst()) {
+
+            String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+
+            Cursor emailCursor = contentResolver.query(
+                    ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+                    null,
+                    ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactId,
+                    null,
+                    null
+            );
+
+            if (emailCursor.moveToFirst()){
+                do {
+                    this.emails.add(emailCursor.getString(emailCursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS)));
+                } while (emailCursor.moveToNext());
+            }
+        }
+
+        return this.emails;
     }
 
     public String getPhotoId(){
@@ -116,10 +162,8 @@ public class SynccContact {
     //setter
     public void setName(String name){this.name=name;}
 
-    public void addNumber(String number){
-        //replaces old number
-        this.numbers.add(number);
-        this.hasPhoneNumber=true;
+    public void addEmail(String email){
+        this.emails.add(email);
     }
 
     public void addPhotoInfo(String photoId, String photoThumbUri, String photoUri) {
@@ -132,8 +176,16 @@ public class SynccContact {
 
     //other methods
     public void deleteNumbers(){
-        this.numbers.clear();
+        this.number="";
         this.hasPhoneNumber=false;
+    }
+
+    public void deleteEmails(){
+        this.emails.clear();
+    }
+
+    private void test(CharSequence charSequence){
+        Toast.makeText(context,charSequence,Toast.LENGTH_SHORT).show();
     }
 
 }

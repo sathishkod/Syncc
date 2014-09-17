@@ -19,13 +19,18 @@
         />
 
     <TextView
-        android:id="@+id/contactdetails_number"
+        android:id="@+id/contactdetails_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="25sp"
         android:layout_below="@id/contactdetails_name"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:textSize="22sp"
+        />
+
+    <ListView
+        android:id="@+id/contactdetails_emails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contactdetails_phone_number"
         />
 
     </RelativeLayout>
