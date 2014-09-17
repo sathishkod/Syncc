@@ -160,13 +160,9 @@ public class MainActivity extends Activity
 
     private Bundle contactToBundle(SynccContact synccContact){
         Bundle bundle=new Bundle();
-        bundle.putString(ContactDisplayFragment.CONTACT_ID, synccContact.getId());
+        bundle.putLong(ContactDisplayFragment.CONTACT_ID, synccContact.getId());
         bundle.putString(ContactDisplayFragment.CONTACT_NAME, synccContact.getName());
         bundle.putInt(ContactDisplayFragment.CONTACT_HAS_PHONE_NUMBER, synccContact.getHasPhoneNumberValue());
-        bundle.putString(ContactDisplayFragment.CONTACT_NUMBER, synccContact.getNumber());
-        bundle.putString(ContactDisplayFragment.CONTACT_PHOTO_ID, synccContact.getPhotoId());
-        bundle.putString(ContactDisplayFragment.CONTACT_PHOTO_THUMBNAIL_URI, synccContact.getPhotoThumbUri());
-        bundle.putString(ContactDisplayFragment.CONTACT_PHOTO_URI, synccContact.getPhotoUri());
         return bundle;
     }
 

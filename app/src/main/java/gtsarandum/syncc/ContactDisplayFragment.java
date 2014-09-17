@@ -57,11 +57,6 @@ public class ContactDisplayFragment extends Fragment {
         numberTextView=(TextView) frameLayout.findViewById(R.id.contactdetails_number);
 
         nameTextView.setText(synccContact.getName());
-        if (synccContact.isHasPhoneNumber()){
-            numberTextView.setText(synccContact.getNumber());
-        } else {
-            numberTextView.setText(getResources().getString(R.string.no_number_available));
-        }
     }
 
     @Override
@@ -72,13 +67,10 @@ public class ContactDisplayFragment extends Fragment {
 
     private SynccContact bundleToContact(){
         SynccContact synccContact=new SynccContact(
-                getArguments().getString(CONTACT_ID),
+                getActivity(),
+                getArguments().getLong(CONTACT_ID),
                 getArguments().getString(CONTACT_NAME),
-                getArguments().getInt(CONTACT_HAS_PHONE_NUMBER),
-                getArguments().getString(CONTACT_NUMBER),
-                getArguments().getString(CONTACT_PHOTO_ID),
-                getArguments().getString(CONTACT_PHOTO_THUMBNAIL_URI),
-                getArguments().getString(CONTACT_PHOTO_URI)
+                getArguments().getInt(CONTACT_HAS_PHONE_NUMBER)
         );
 
         return synccContact;

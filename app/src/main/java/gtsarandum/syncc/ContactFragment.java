@@ -33,13 +33,9 @@ public class ContactFragment extends ListFragment {
         contactCursor=getActivity().getContentResolver().query(
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 new String[]{
-                        ContactsContract.CommonDataKinds.Phone._ID,//0
-                        ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,//1
-                        ContactsContract.CommonDataKinds.Phone.HAS_PHONE_NUMBER,//2
-                        ContactsContract.CommonDataKinds.Phone.NUMBER,//3
-                        ContactsContract.Contacts.PHOTO_ID,//4
-                        ContactsContract.Contacts.PHOTO_THUMBNAIL_URI,//5
-                        ContactsContract.Contacts.PHOTO_URI//6
+                        ContactsContract.Contacts._ID,//0 - Long
+                        ContactsContract.Contacts.DISPLAY_NAME_PRIMARY,//1 - String
+                        ContactsContract.Contacts.HAS_PHONE_NUMBER,//2 - Integer
                 },
                 null,
                 null,
@@ -61,6 +57,7 @@ public class ContactFragment extends ListFragment {
             for (int i=0;i<contactCursor.getCount();i++){
                 name=contactCursor.getString(1);
                 id=contactCursor.getString(0);
+
                 if (cmp<name.charAt(0)){
                     cmp=name.charAt(0);
                     contactAdapter.addSectionHeaderItem(String.valueOf(cmp), null);
@@ -70,13 +67,10 @@ public class ContactFragment extends ListFragment {
 
                 //add contact to contact list
                 contacts.add(new SynccContact(
-                        contactCursor.getString(0),
+                        getActivity(),
+                        contactCursor.getLong(0),
                         contactCursor.getString(1),
-                        contactCursor.getInt(2),
-                        contactCursor.getString(3),
-                        contactCursor.getString(4),
-                        contactCursor.getString(5),
-                        contactCursor.getString(6)
+                        contactCursor.getInt(2)
                 ));
 
                 contactCursor.moveToNext();
